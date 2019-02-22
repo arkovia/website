@@ -1,0 +1,89 @@
+@import "~stylus/variables"
+
+html, body{
+    margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6{
+    margin-top 0.3em
+    margin-bottom: 0.2em
+}
+
+a{
+    cursor pointer
+    color: $theme1
+}
+
+body {
+    font-family: "Roboto", Arial, Helvetica, sans-serif
+    background: #eee
+    color: #222
+}
+
+.end{
+    margin-left: auto
+}
+
+.flex-center{
+    display flex
+    align-items center
+    justify-content center
+    flex-direction column
+}
+
+.row{
+    flex-direction row
+    display flex
+}
+
+.huge-title{
+    font-size 3.5em;
+    font-weight 700
+    font-style italic
+    @media(max-width $tablet){
+        font-size: 3em;
+    }
+}
+
+.flex-column{
+    flex-direction column
+    display: flex
+}
+
+.flex-row{
+    flex-direction row
+    display flex
+}
+
+*{
+    box-sizing border-box
+}
+
+.align-center{
+    text-align center
+}
+
+a{
+    text-decoration none
+}
+
+.shadow{
+    text-shadow 0 0 0.2em rgba(0,0,0,0.5)
+}
+
+.margin-top-bottom{
+    margin-top: 10px;
+    margin-bottom: 1px;
+}
+
+.light{
+    font-weight 300;
+}
+
+.center{
+    text-align center
+}
+
+.small-text{
+    font-size 13px
+}
