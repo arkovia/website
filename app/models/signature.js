@@ -54,9 +54,11 @@ class Signature extends Model{
     }
 
     static get query(){
-        return `
+        /**
             signatures: [Signature]
             signature(id: ObjectID): Signature
+         */
+        return `
             signatureCount: Int
             signaturesPastWeek: Int
         `
