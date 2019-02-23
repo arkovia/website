@@ -26,10 +26,10 @@ router.use(async (ctx, next) => {
 })
 
 router.get('/', async (ctx) => {
-    let signatureCount = (await axios.post('https://localhost/graph/', {query: `{
+    let signatureCount = (await axios.post('/graph/', {query: `{
         signatureCount
     }`, variables: {}})).data.data.signatureCount
-    let signaturesPastWeek = (await axios.post('https://localhost/graph/', {query: `{
+    let signaturesPastWeek = (await axios.post('/graph/', {query: `{
         signaturesPastWeek
     }`, variables: {}})).data.data.signaturesPastWeek
 
@@ -42,10 +42,10 @@ router.get('/', async (ctx) => {
 })
 
 router.get('/supporter-signup', async (ctx) => {
-    let signatureCount = (await axios.post('https://localhost/graph/', {query: `{
+    let signatureCount = (await axios.post('/graph/', {query: `{
         signatureCount
     }`, variables: {}})).data.data.signatureCount
-    let signaturesPastWeek = (await axios.post('https://localhost/graph/', {query: `{
+    let signaturesPastWeek = (await axios.post('/graph/', {query: `{
         signaturesPastWeek
     }`, variables: {}})).data.data.signaturesPastWeek
 
@@ -58,10 +58,10 @@ router.get('/supporter-signup', async (ctx) => {
 })
 
 router.get('/thanks-for-signing-up', async (ctx) => {
-    let signatureCount = (await axios.post('https://localhost/graph/', {query: `{
+    let signatureCount = (await axios.post('/graph/', {query: `{
         signatureCount
     }`, variables: {}})).data.data.signatureCount
-    let signaturesPastWeek = (await axios.post('https://localhost/graph/', {query: `{
+    let signaturesPastWeek = (await axios.post('/graph/', {query: `{
         signaturesPastWeek
     }`, variables: {}})).data.data.signaturesPastWeek
 

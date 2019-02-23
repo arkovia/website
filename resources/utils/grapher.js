@@ -32,7 +32,7 @@ export default {
 
     async request(query){
         return (await axios.post(
-            'https://localhost/graph/',
+            '/graph/',
             { query: query, variables: {}
         })).data
     }
