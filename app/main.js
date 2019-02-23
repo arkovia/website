@@ -19,9 +19,9 @@ app.servue.webpackCommon.module.rules.push({
     ]
 })
 
+app.use(koastatic(app.get('path:resources/public')))
 app.use(require('koa-bodyparser')())
 app.use(router)
-app.use(koastatic(app.get('path:resources/public')))
 http.createServer(app.handle()).listen(80)
 try {
     let options = {
