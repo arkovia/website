@@ -16,14 +16,12 @@
         "moment": "^2.24.0",
         "moongraph": "~0.0.7",
         "signature_pad": "^3.0.0-beta.3",
-        "slashed": "^1.5.2",
+        "slashed": "^1.7.0",
         "stylus": "^0.54.5",
         "stylus-loader": "^3.0.2",
         "vue": "^2.6.7",
-        "vue-google-autocomplete": "^1.1.0",
         "vue-mq": "^1.0.1",
         "vue-server-renderer": "^2.6.7",
-        "vue-signature-pad": "^1.1.8",
         "vue-template-compiler": "^2.6.7",
         "vuelidate": "^0.7.4"
     }

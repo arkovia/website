@@ -2,7 +2,7 @@ const koastatic = require('koa-static')
 const slashed = require('slashed')
 const path = require('path')
 const https = require('https')
-const http = require('https')
+const http = require('http')
 const fs = require('fs')
 
 var basedir = path.resolve(__dirname, '..')
@@ -22,12 +22,13 @@ app.servue.webpackCommon.module.rules.push({
 app.use(require('koa-bodyparser')())
 app.use(router)
 app.use(koastatic(app.get('path:resources/public')))
-
-let options
-options = {
-    key: fs.readFileSync(app.get("path:config/ssl/privkey.pem")),
-    cert: fs.readFileSync(app.get("path:config/ssl/cert.pem"))
+http.createServer(app.handle()).listen(80)
+try {
+    let options = {
+        key: fs.readFileSync(app.get("path:config/ssl/privkey.pem")),
+        cert: fs.readFileSync(app.get("path:config/ssl/cert.pem"))
+    }
+    https.createServer(options, app.handle()).listen(443)
+} catch (error) {
+    console.log('server could not start on https')
 }
-//https.createServer(options, app.handle).listen(443)
-https.createServer(options, app.handle()).listen(443)
-http.createServer({}, app.handle()).listen(80)
