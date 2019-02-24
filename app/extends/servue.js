@@ -24,8 +24,6 @@ module.exports = function(app){
         ctx.render = async(vueFile, data) => {
             //data ? data = {...data, ctx} : data = { ctx }
 
-            console.log(data)
-
             ctx.body = await servue.render(vueFile, data)
         }
     
