@@ -5,6 +5,11 @@
             <script
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAErHT0mVxYKN8mvFBZgGzX_2eSdmvPMnw&libraries=places"
             ></script>
+            <meta property="og:url" content="https://future.org.au/supporter-signup"/>
+            <meta property="og:type" content="website"/>
+            <meta property="og:title" content="Sign our petition to register our party"/>
+            <meta property="og:description" content="Sign up to register online in minute, takes one minute to sign. Help us shape Australia's future"/>
+            <meta property="og:image" content="https://future.org.au/images/supporter-signup.png"/>
         </template>
         <template slot="content">
             <div class="flex-center padding-top-desktop">
@@ -13,7 +18,7 @@
                         <div style="color: #5f5; padding-right: 5px">+ {{ signaturesPastWeek }}</div>
                         <div>this week</div>
                     </div>
-                    <progressBar :current="800 + signatureCount" :max="1000"/>
+                    <progressBar :current="800 + signatureCount >= 1000 ? 1000 : 800 + signatureCount" :max="1000"/>
                 </div>
 
                 <card class="medium padding-medium">
