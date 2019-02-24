@@ -41,7 +41,9 @@ class Signature extends Model{
             },
             createSignature: async ({input}) => {
                 console.log('new signup: ')
-                console.log(input)
+                let { name, address, signature} = input
+                let data = { name, address}
+                console.log(data)
                 let model = new Signature(input)
                 await model.save()
                 return model.transform
