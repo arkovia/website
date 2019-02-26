@@ -2,8 +2,8 @@
     <div :style='{ width: this.width }' class="container">
         <div class="label" :class="{ 'error': hasError() }">Signature</div>
         <a @click="clearSignature()" class="clear">Clear</a>
-        <div :class="{ visible: visibleWatermark }" class="pencil"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABHNCSVQICAgIfAhkiAAAAqhJREFUaIHd2L2LE0EYx/Hv5IXLwYIQUE4RvOIKG7urAhcvssuF09LWyhfQysb/QAQrOwUFO5vDQpQ7cmwxkuBLccWBCGdnr0QQRchMdmwux5oXN7vZJLP3K2efZ3Y+zAwLK7A0jUbjdD6ff2iMuSKE+CqEeOC67stR9WKWixs3UsolrfVH4Fzfo1ue5z0b1pOb/rLipdlsnlRKtRhEADz1ff/msD6rdqTRaJRzudw7IcT5iNKBnbEG4vv+CaAFXBiz5R+MFUdLSukAkvER0HfMrIAcRifoOcJYc7SklI5SalcIUUnQfnVuO3J4J45Sq9V+OY7jGmPex53LGHN/LhAp5Qpw4Pv+3fB4pVL54ziOC7yNOeWZmUOklCta6xawBDwahlFK1YmHeT3TO9KHCOeO53lPwgM7OzsLhULhjRDCi5j2SxAE1ZlBpJTLWusPDCJ6GcDs7e0V2+329iiMMeZzsVhcr9Vq32cCkVIuK6VaQoizEaVjY4wx+4uLi5fW1tZ+wAy+IzEQAI99378dHlhdXVXlcvkysN0bM8bsa60v9hAw5e9ITEQ41z3Pe943V0Fr/Qo4pZRyNzc3f4afTw0yAQLAADeGYTqdzsLGxsbv/oapQCZE9DIUMyqpQ1JC9GKEENdc130RVZjqZU8ZASCCILi3tbWVjyxM6YXTQAB86na76/V6vR1VmApk3ghIAWIDAiaE2IKACSA2ISAhxDYEJIDYiICYEFsREANiMwLGhNiOgDEgWUBABCQrCPgPJEsIGAHJGgKGQLKIgD5IVhEQgmQZAYeQrCMAxHFAAOSOAwIgdxwQkO5flLkhAAppTGKMOQiCYG4ISAFijDkolUrVarU6NwRMeLRCiG9pLShpEkNsQkBCiG0ISACxEQExIbYiIAbEZgTAX6flEY7QMTLkAAAAAElFTkSuQmCC" alt=""></div>
         <div :style='{ height: this.height, width: this.width }' class="input-signature">
+            <div :class="{ visible: visibleWatermark }" class="pencil"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABHNCSVQICAgIfAhkiAAAAqhJREFUaIHd2L2LE0EYx/Hv5IXLwYIQUE4RvOIKG7urAhcvssuF09LWyhfQysb/QAQrOwUFO5vDQpQ7cmwxkuBLccWBCGdnr0QQRchMdmwux5oXN7vZJLP3K2efZ3Y+zAwLK7A0jUbjdD6ff2iMuSKE+CqEeOC67stR9WKWixs3UsolrfVH4Fzfo1ue5z0b1pOb/rLipdlsnlRKtRhEADz1ff/msD6rdqTRaJRzudw7IcT5iNKBnbEG4vv+CaAFXBiz5R+MFUdLSukAkvER0HfMrIAcRifoOcJYc7SklI5SalcIUUnQfnVuO3J4J45Sq9V+OY7jGmPex53LGHN/LhAp5Qpw4Pv+3fB4pVL54ziOC7yNOeWZmUOklCta6xawBDwahlFK1YmHeT3TO9KHCOeO53lPwgM7OzsLhULhjRDCi5j2SxAE1ZlBpJTLWusPDCJ6GcDs7e0V2+329iiMMeZzsVhcr9Vq32cCkVIuK6VaQoizEaVjY4wx+4uLi5fW1tZ+wAy+IzEQAI99378dHlhdXVXlcvkysN0bM8bsa60v9hAw5e9ITEQ41z3Pe943V0Fr/Qo4pZRyNzc3f4afTw0yAQLAADeGYTqdzsLGxsbv/oapQCZE9DIUMyqpQ1JC9GKEENdc130RVZjqZU8ZASCCILi3tbWVjyxM6YXTQAB86na76/V6vR1VmApk3ghIAWIDAiaE2IKACSA2ISAhxDYEJIDYiICYEFsREANiMwLGhNiOgDEgWUBABCQrCPgPJEsIGAHJGgKGQLKIgD5IVhEQgmQZAYeQrCMAxHFAAOSOAwIgdxwQkO5flLkhAAppTGKMOQiCYG4ISAFijDkolUrVarU6NwRMeLRCiG9pLShpEkNsQkBCiG0ISACxEQExIbYiIAbEZgTAX6flEY7QMTLkAAAAAElFTkSuQmCC" alt=""></div>
             <canvas class="canvas" ref="signaturePadCanvas"></canvas>
         </div>
         <div class="border" :class="{ 'error': hasError() }"></div>
@@ -133,19 +133,21 @@ export default {
 @import "~stylus/variables"
 
 canvas{
-    z-index 4
+    z-index 5
     position relative
 }
 .input-signature{
     background #eeeeee
     border-top-left-radius 4px
     border-top-right-radius 4px
+    position relative
 }
 
 .label{
     padding-bottom 4px;
     position: absolute
     font-size 13px
+    z-index 4
     top: 6px
     color: #777
     padding-left 12px
@@ -155,11 +157,11 @@ canvas{
 }
 
 .clear{
-    z-index 5
+    z-index 6
     padding-bottom 4px;
     position: absolute
     font-size 13px
-    top: 6px
+    padding-top 6px
     right: 0
     color: $theme2
     padding-right 12px
@@ -192,9 +194,9 @@ canvas{
 
 .pencil{
     position: absolute;
+    z-index 3
     height: 100%;
     width: 100%;
-    top: -10px;
     display: none;
     align-items: center;
     justify-content: center;

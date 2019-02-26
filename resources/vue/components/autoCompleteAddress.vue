@@ -58,12 +58,11 @@ export default {
             country: ['au']
         }
 
-        this.autocomplete = new google.maps.places.Autocomplete(
-            this.$refs.autocomplete.$refs.input,
-            options
-        );
+        let input = this.$refs.autocomplete.$refs.input
 
-        this.autocomplete.addListener("place_changed", this.onPlaceChanged);
+        this.autocomplete = new google.maps.places.Autocomplete(input, options)
+
+        this.autocomplete.addListener("place_changed", this.onPlaceChanged)
     },
 
     methods: {
