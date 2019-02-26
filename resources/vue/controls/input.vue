@@ -72,7 +72,9 @@ export default {
     position relative
     input, select{
             outline 0
-            border: 0
+            border 0
+            margin 0
+            border-radius 0
             width: 100%
             font-size 16px
             background: #eee
