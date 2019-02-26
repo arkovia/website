@@ -8,7 +8,7 @@
             <meta property="og:url" content="https://future.org.au/supporter-signup"/>
             <meta property="og:type" content="website"/>
             <meta property="og:title" content="Sign our petition to register our party"/>
-            <meta property="og:description" content="Sign up to register online in minute, takes one minute to sign. Help us shape Australia's future"/>
+            <meta property="og:description" content="Sign our petition in under one minute. SA's newest political party. Help us shape Australia's future"/>
             <meta property="og:image" content="https://future.org.au/images/supporter-signup.png"/>
         </template>
         <template slot="content">
@@ -73,14 +73,18 @@
                         <checkbox
                             class="center"
                             :checked.sync="form.registeredVoter"
-                            placeholder="Are you an enrolled voter?"
+                            placeholder="Are you an enrolled registered voter?"
                         ></checkbox>
 
                         <div v-if="!form.registeredVoter">
-                            <p class="small-text">If you're not a registered voter, register now. <strong>It takes less than 3 minutes to enrol.</strong></p>
+                            <p class="small-text">If you're not a registered voter, enrol first. <strong>It takes less than 3 minutes to enrol.</strong></p>
                             <p class="small-text">When you're finished come back and sign up. You don't need to be over 18 to enrol to vote</p>
 
                             <a href="https://www.aec.gov.au/enrol/" target="_blank" rel="noopener noreferrer">Click to enrol online now</a> 
+                        </div>
+                        <div v-if="form.registeredVoter">
+                            <p class="small-text">If you haven't enrolled, it takes 3 minutes to enrol.</p>
+                            <a href="https://www.aec.gov.au/enrol/" target="_blank" rel="noopener noreferrer">Enrol Online Now</a> 
                         </div>
                         <div class="margin-top-bottom align-center">
                             <buttonround :locked="submitted" @click.native="signUp">Sign Up</buttonround>
