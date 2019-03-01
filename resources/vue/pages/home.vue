@@ -1,7 +1,7 @@
 <template>
     <parent>
-        <template slot="title">Home</template>
-        <template slot="description">Test</template>
+        <template slot="title">Welcome</template>
+        <template slot="description">Future Australia Party South Australia - SA's Newest political party</template>
         <template slot="content">
             <hero img="/images/home-cover.jpg" class="padding-large img">
                 <div class="flex-center align-center">

@@ -44,5 +44,10 @@ export default {
     box-shadow:inset 0 0 0 2px white
     color: white
 }
+.trans-color {
+    background: none
+    box-shadow:inset 0 0 0 2px $theme1
+    color: $theme1
+}
 </style>
 

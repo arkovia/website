@@ -6,6 +6,8 @@
     </div>
 </template>
 <style lang="stylus" scoped>
+@import "~stylus/variables"
+
 .card{
     background: white;
     padding: 10px;

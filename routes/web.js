@@ -73,4 +73,8 @@ router.get('/thanks-for-signing-up', async (ctx) => {
     await ctx.render('vue/pages/thanks-for-signing-up', data)
 })
 
+router.get('/members', async (ctx) => {
+    await ctx.render('vue/pages/members')
+})
+
 module.exports = router
