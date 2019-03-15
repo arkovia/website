@@ -16,6 +16,56 @@ class User extends Model {
         
         return obj
     }
+
+    validateToken(token){
+        let sessions = this.document.sessions
+        if(sessions && sessions.constructor === Array){
+            let dateOffset = (24*60*60*1000) * 20
+            let maxDate = new Date().getTime() + dateOffset
+
+            let match = false
+
+            for(let index in sessions){
+                let session = sessions[index]
+
+                let sessionValidUntil = session.lastUsed + dateOffset
+                
+                if(sessionValidUntil < maxDate){
+                    if(session.token === token){
+                        this.document.sessions[index].lastUsed = new Date().getTime()
+                        this.save()
+
+                        match = true
+
+                        continue
+                    }
+                }else{
+                    delete this.document.sessions[index]
+                    this.save()
+                }
+            }
+
+            if(match) return true
+        }
+
+        return false
+    }
+
+    static async authenticate(token, ctx){
+        let secret = ctx.app.get('env:secret')
+        let decodedToken = jwt.verify(token, secret)
+        
+        if(decodedToken.id){
+            let user = await User.findOne({_id: new ObjectID(decodedToken.id)})
+            if(user.validateToken(token)){
+                return user
+            }
+        }
+
+        return null
+
+        //figure out fail process
+    }
     
     static get resolvers(){
         return {
@@ -27,6 +77,7 @@ class User extends Model {
             createUser: async ({input}) => {
                 input.email = input.email.toLowerCase()
                 input.password = await bcrypt.hash(input.password, 12)
+                input.sessions = []
                 
                 let model = new User(input)
 
@@ -35,20 +86,27 @@ class User extends Model {
                 return model.transform
             },
             loginUser: async({input}, ctx) => {
-                let model = await this.findOne({email: input.user.toLowerCase()})
+                let model
+                
+                if(!model) model = await this.findOne({email: input.user.toLowerCase()})
                 if(!model) model = await this.findOne({username: input.user})
                 if(!model) throw Error(`No user found with username or email of: ${input.user}`)
-                
+
                 let hashedPassword = model.document.password
 
                 let match = await bcrypt.compare(input.password, hashedPassword)
                 
                 if(match){ 
                     let secret = ctx.app.get('env:secret')
-                    let token = jwt.sign(String(model.document._id), secret)
-                    return token
+                    let session = {
+                        token: jwt.sign({id: String(model.document._id)}, secret),
+                        lastUsed: new Date().getTime()
+                    }
+                    model.document.sessions.push(session)
+                    model.save()
+                    return session.token
                 }
-                throw Error(`Password for ${input.user} is incorrect`)
+                throw Error(`Password is incorrect`)
             }
         }
     }
@@ -80,7 +138,7 @@ class User extends Model {
             profile: UserProfile
             address: String
             roles: [String]
-            sessions: [UserSession]
+            sessions (input: PaginationInput): [UserSession]
         }
 
         interface UserProfile {
@@ -90,11 +148,7 @@ class User extends Model {
         }
 
         type UserSession {
-            _id: ObjectID
-            token: String
-            refreshToken: String
-            lastUsed: Int
-            user: User
+            lastUsed: String
             agent: String
         }
 

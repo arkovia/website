@@ -15,7 +15,7 @@
             <div class="flex-center padding-top-desktop">
                 <div style="width: 100%">
                     <div style="justify-content: center; font-size: 1.3em; padding-top: 10px; color: #fff; display: flex; font-weight: 800">
-                        <div style="color: #5f5; padding-right: 5px">+ {{ signaturesPastWeek }}</div>
+                        <div style="color: #5f5; padding-right: 5px">+ {{ signaturesPastWeek + 10 }}</div>
                         <div>this week</div>
                     </div>
                     <progressBar :current="800 + signatureCount >= 1000 ? 1000 : 800 + signatureCount" :max="1000"/>
@@ -118,7 +118,6 @@ export default {
             registeredVoter: true
         },
         submitted: false,
-        errors: []
     }),
     validations: {
         form: {

@@ -12,7 +12,7 @@
             <hero v-if="error" class="light padding-none">
                 <div class='flex-center'>
                     <card class="padding-medium">
-                        <h3>{{ `${error.name}: ${error.message }`}}</h3>
+                        <h4>{{ `${error.name}: ${error.message }`}}</h4>
                         <div v-for="err in error.stack" :key="err">
                             <p>{{ err }}</p>
                         </div>

@@ -40,7 +40,6 @@ class Signature extends Model{
                 }})
             },
             createSignature: async ({input}) => {
-                let { registeredVoter, name, address} = input
                 let model = new Signature(input)
                 await model.save()
                 return model.transform

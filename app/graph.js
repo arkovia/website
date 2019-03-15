@@ -45,8 +45,9 @@ const schema = buildSchema(schemaString)
 addDirectiveResolveFunctionsToSchema(schema, {
     async hasPermission(next, source, {permission}, ctx){
         let user = ctx.state.user
+
         if(!user){
-            throw new Error("Must be authenticiated")
+            throw new Error("Must be authenticated")
         }
 
         let perms = []
@@ -56,7 +57,7 @@ addDirectiveResolveFunctionsToSchema(schema, {
             .filter(val=>{
                 perms = [...perms, ...val]
             })
-        if (perms.indexOf(permission) !== -1) return next()
+        if (perms.indexOf(permission) !== -1) return await next()
         throw new Error("Does not have permissions")
     }
 })

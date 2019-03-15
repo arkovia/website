@@ -1,19 +1,25 @@
 const Slashed = require('slashed')
 const Router = Slashed.Router
 const graph = require('../app/graph')
-const jwt = require('jsonwebtoken')
 const User = require('../app/models/user')
-const { ObjectID } = require('mongodb')
 var router = new Router()
 
 router.use(async (ctx, next) => {
+    try {
+        await next()
+    } catch (err) {
+        console.log(err)
+        ctx.body = JSON.stringify(err)
+    }
+})
+
+router.use(async (ctx, next) => {
     let authorization = ctx.request.header.authorization
+    
     if(authorization){
         let token = authorization.substr(7)
-        let secret = ctx.app.get('env:secret')
-        let verify = jwt.verify(token, secret)
-        if(verify){
-            let user = await User.findOne({_id: new ObjectID(verify)})
+        let user = await User.authenticate(token, ctx)
+        if(user){
             ctx.state.user = user
         }
     }
