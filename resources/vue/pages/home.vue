@@ -3,7 +3,7 @@
         <template slot="title">Home</template>
         <template slot="description">Test</template>
         <template slot="content">
-            <hero img="/images/home-cover.jpg" class="padding-large img">
+            <hero img="/images/home-cover.png" class="padding-large img">
                 <div class="flex-center align-center">
                     <div class="huge-title shadow">
                         the viable alternative

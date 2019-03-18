@@ -1,4 +1,5 @@
-var Servue = require('servue')
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
+const Servue = require('servue')
 
 module.exports = function(app){
     var servue = new Servue()

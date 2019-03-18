@@ -3,12 +3,12 @@
         <div class="top-header">
             <div class="inner-header">
                 <a href="/" class="header-logo">
-                    <img class="logo" src="\images\future.png" alt="Future Australia Party Logo">
-                    <div class="logo-text">Future</div>
+                    <img class="logo" src="\images\arkovia.png" alt="Arkovia Logo">
+                    <div class="logo-text">Arkovia</div>
                 </a>
                 <div class="end margin-sides row flex-center">
-                    <roundbutton href="/members" class="trans-white margin-sides">Members</roundbutton>
-                    <roundbutton href="/support" class="white">Support</roundbutton>
+                    <roundbutton href="/members" class="trans-white margin-sides">Sign In</roundbutton>
+                    <roundbutton href="/support" class="white">Start</roundbutton>
                 </div>
             </div>
         </div>
@@ -20,10 +20,11 @@
                 <div class="menu-container">
                     <div :class="{ opened: menuToggle}" class="nav-items">
                         <nav-link href="/">Home</nav-link>
-                        <nav-link href="/party">Our Party</nav-link>
+                        <nav-link href="/party">Information</nav-link>
                         <nav-link href="/plan">Our Plan</nav-link>
-                        <nav-link href="/shop">Shop</nav-link>
+                        <nav-link href="/shop">Services</nav-link>
                         <nav-link href="/news">News</nav-link>
+                        <nav-link href="/news">Shop</nav-link>
                     </div>
                 </div>
             </div>

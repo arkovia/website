@@ -1,5 +1,5 @@
 {
-    "name": "futurewebsite",
+    "name": "arkoviawebsite",
     "nodemonConfig": {
         "ext": "js json vue styl"
     },
@@ -7,6 +7,7 @@
     "dependencies": {
         "apollo-server-koa": "^2.4.6",
         "axios": "^0.18.0",
+        "browser-sync": "^2.26.3",
         "graphiql": "^0.12.0",
         "graphql": "^14.1.1",
         "jsonify-error": "^1.4.4",
@@ -15,9 +16,9 @@
         "koa-static": "^5.0.0",
         "moment": "^2.24.0",
         "moongraph": "~0.0.7",
+        "servue": "^1.1.3",
         "signature_pad": "^3.0.0-beta.3",
         "slashed": "^2.0.0",
-        "servue": "^1.1.3",
         "stylus": "^0.54.5",
         "stylus-loader": "^3.0.2",
         "vue": "^2.6.7",
@@ -25,5 +26,8 @@
         "vue-server-renderer": "^2.6.7",
         "vue-template-compiler": "^2.6.7",
         "vuelidate": "^0.7.4"
+    },
+    "devDependencies": {
+        "browser-sync-webpack-plugin": "^2.2.2"
     }
 }
