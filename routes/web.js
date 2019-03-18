@@ -12,15 +12,17 @@ router.use(async (ctx, next) => {
     try {
         await next()
         if(ctx.body === undefined){
+            ctx.status = ctx.status || 404
             return await ctx.render('vue/pages/error', {
                 code: 404,
             })
         }
     } catch (err) {
+        console.log(err)
         ctx.status = err.status || 500
         return await ctx.render('vue/pages/error', {
             code: ctx.status,
-            error: jsonifyError(err)
+            error: jsonifyError(new Error(err))
         })
     }
 })
@@ -72,5 +74,7 @@ router.get('/thanks-for-signing-up', async (ctx) => {
     
     await ctx.render('vue/pages/thanks-for-signing-up', data)
 })
+
+router.use(require('./app'))
 
 module.exports = router

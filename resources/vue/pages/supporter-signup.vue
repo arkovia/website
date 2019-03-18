@@ -118,7 +118,6 @@ export default {
             registeredVoter: true
         },
         submitted: false,
-        errors: []
     }),
     validations: {
         form: {

@@ -22,6 +22,7 @@
                     :type="type"
                     :name="name"
                     ref="input"
+                    :autocomplete="autocomplete ? autocomplete : ''"
                     v-model="inputData"
                     placeholder="">
             </template>
@@ -29,13 +30,13 @@
             <div class="border"></div>
         </div>
         <template v-if="undertext !== undefined || error">
-            <div class='under-text' :class="{ 'error': !!error }">{{ error ? error : undertext }}</div>
+            <div class='under-text' :class="{ 'error': !!error }">{{ error ? error : undertext ? undertext : ''}}</div>
         </template>
     </div>
 </template>
 <script>
 export default {
-    props: ['type', 'name', 'vmodel', 'placeholder', 'undertext', 'error', 'v'],
+    props: ['type', 'name', 'vmodel', 'placeholder', 'undertext', 'error', 'v', 'autocomplete'],
     data: () => ({
         focus: false
     }),

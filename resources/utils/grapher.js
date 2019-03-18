@@ -31,9 +31,11 @@ export default {
     },
 
     async request(query){
-        return (await axios.post(
+        let request = (await axios.post(
             '/graph/',
             { query: query, variables: {}
-        })).data
+        }))
+
+        return request.data
     }
 }

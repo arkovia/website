@@ -76,10 +76,10 @@ export default {
     },
     computed: {
         title(){
-            return this.$slots.title ? this.$slots.title[0].text + ' - Future Aus' : 'Future Aus' 
+            return this.$slots.title ? this.$slots.title[0].text + ' - Future Australia Party' : 'Future Australia Party' 
         },
         description(){
-            return this.$slots.description ? this.$slots.description[0].text : 'Australia\'s newest party - the viable alternative'
+            return this.$slots.description ? this.$slots.description[0].text : 'Australia\'s newest political party - the viable alternative'
         }
     }
 }
