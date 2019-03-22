@@ -1,8 +1,6 @@
 <template>
     <div class="hero" :style=heroImage>
-        <div class="inner-hero">
-            <slot></slot>
-        </div>
+        <slot></slot>
     </div>
 </template>
 <script>
@@ -37,18 +35,36 @@ export default {
         margin: auto 
         max-width $desktop
         width: 100%
+        &.padding-none {
+            padding 10px
+        }
+        &.padding-small{
+            padding 5vh 10px
+        }
+        &.padding-medium {
+            padding 10vh 10px
+        }
+        &.padding-large {
+            padding 15vh 10px
+        }
+        &.padding-huge {
+            padding 26vh 10px
+        }
     }
-    &.padding-none{
-        padding: 10px
+    &.padding-none {
+        padding 10px
     }
     &.padding-small{
-        padding: 5vh 10px
+        padding 5vh 10px
     }
-    &.padding-medium{
+    &.padding-medium {
         padding 10vh 10px
     }
-    &.padding-large{
-        padding 25vh 10px
+    &.padding-large {
+        padding 15vh 10px
+    }
+    &.padding-huge {
+        padding 26vh 10px
     }
 }
 </style>

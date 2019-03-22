@@ -6,9 +6,9 @@
                     <img class="logo" src="\images\arkovia.png" alt="Arkovia Logo">
                     <div class="logo-text">Arkovia</div>
                 </a>
-                <div class="end margin-sides row flex-center">
-                    <roundbutton href="/members" class="trans-white margin-sides">Sign In</roundbutton>
-                    <roundbutton href="/support" class="white">Start</roundbutton>
+                <div class="end margin-sides row flex-center-all">
+                    <roundbutton href="/login" class="trans-white margin-sides">Sign In</roundbutton>
+                    <roundbutton href="/start" class="white">Start</roundbutton>
                 </div>
             </div>
         </div>
@@ -20,11 +20,10 @@
                 <div class="menu-container">
                     <div :class="{ opened: menuToggle}" class="nav-items">
                         <nav-link href="/">Home</nav-link>
-                        <nav-link href="/party">Information</nav-link>
-                        <nav-link href="/plan">Our Plan</nav-link>
-                        <nav-link href="/shop">Services</nav-link>
+                        <nav-link href="/learn">Learn</nav-link>
+                        <nav-link href="/services">Services</nav-link>
                         <nav-link href="/news">News</nav-link>
-                        <nav-link href="/news">Shop</nav-link>
+                        <nav-link href="/shop">Shop</nav-link>
                     </div>
                 </div>
             </div>
@@ -57,8 +56,7 @@ export default {
 @import '~stylus/variables'
 
 header {
-    display: flex
-    flex-direction column
+    display block
     background: white
     box-shadow 0 0px 10px 2px rgba(0,0,0,0.2)
     position relative

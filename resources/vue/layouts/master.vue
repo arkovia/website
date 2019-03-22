@@ -7,8 +7,8 @@
             <title>{{ title }}</title>
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <meta name="theme-color" content="#009CB5">
-            <meta name="description" :content="description">
-            <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700" rel="stylesheet">
+            <slot name="description"></slot>
+            <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,700" rel="stylesheet">
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
             <script>
                 (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -17,7 +17,6 @@
                 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
                 })(window,document,'script','dataLayer','GTM-NNVCBCD');
             </script>
-            <!-- Facebook Pixel Code -->
             <script>
                 !function(f,b,e,v,n,t,s)
                 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -30,10 +29,6 @@
                 fbq('init', '304188100242367');
                 fbq('track', 'PageView');
             </script>
-            <noscript><img height="1" width="1" style="display:none"
-            src="https://www.facebook.com/tr?id=304188100242367&ev=PageView&noscript=1"
-            /></noscript>
-<!-- End Facebook Pixel Code -->
             <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/images/favicons/apple-touch-icon-57x57.png" />
             <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/favicons/apple-touch-icon-114x114.png" />
             <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/favicons/apple-touch-icon-72x72.png" />
@@ -57,7 +52,7 @@
             <link rel="manifest" href="/manifest.json">
             <meta name="msapplication-TileColor" content="#ffffff">
             <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-<meta name="theme-color" content="#ffffff">
+            <meta name="theme-color" content="#ffffff">
             <slot name="head"></slot>
         </template>
     </servue>
@@ -76,24 +71,11 @@ export default {
     },
     computed: {
         title(){
-            return this.$slots.title ? this.$slots.title[0].text + ' - Future Australia Party' : 'Future Australia Party' 
-        },
-        description(){
-            return this.$slots.description ? this.$slots.description[0].text : 'Australia\'s newest political party - the viable alternative'
+            return this.$slots.title ? this.$slots.title[0].text + ' - Arkovia' : 'Arkovia' 
         }
     }
 }
 </script>
 <style lang="stylus">
 @import "../../stylus/app"
-
-#app, body, html{
-    height 100%
-}
-
-#app{
-    display flex
-    flex-direction column
-}
-
 </style>

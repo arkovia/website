@@ -7,7 +7,7 @@
 @import "~stylus/variables"
 
 .button-special{
-    display flex
+    display inline-flex
     padding 10px 20px
     background linear-gradient(90deg, #00C186, #008CCB)
     font-size 1em

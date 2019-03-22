@@ -13,7 +13,7 @@ export default {
 @import "~stylus/variables"
 
 .button-round{
-    display inline-block
+    display inline-flex
     padding 8px 18px
     background $theme1
     color: white

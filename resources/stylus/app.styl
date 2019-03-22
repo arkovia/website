@@ -4,7 +4,17 @@ html, body{
     margin: 0;
 }
 
+#app, body, html{
+    height 100%
+}
+
+#app{
+    display flex
+    flex-direction column
+}
+
 h1, h2, h3, h4, h5, h6{
+    font-weight 300
     margin-top 0.3em
     margin-bottom: 0.2em
 }
@@ -26,8 +36,30 @@ body {
 
 .flex-center{
     display flex
-    align-items center
     justify-content center
+    flex-direction column
+}
+
+.flex-mobile-row{
+    display flex
+    flex-direction row
+    > * {
+        flex 1 0 0
+        padding 0 10px
+    }
+    @media (max-width: $laptop) {
+        flex-direction column
+        > * {
+            flex 1 0 auto
+            padding 10px
+        }
+    }
+}
+
+.flex-center-all{
+    display flex
+    justify-content center 
+    align-items center
     flex-direction column
 }
 
@@ -68,7 +100,7 @@ a{
 }
 
 .shadow{
-    text-shadow 0 0 0.2em rgba(0,0,0,0.5)
+    text-shadow 0 0 4px rgba(0,0,0,0.6)
 }
 
 .margin-top-bottom{
@@ -76,8 +108,13 @@ a{
     margin-bottom: 1px;
 }
 
+.margin-top-bottom-large{
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
 .light{
-    font-weight 300;
+    font-weight 200;
 }
 
 .center{
@@ -86,4 +123,35 @@ a{
 
 .small-text{
     font-size 13px
+}
+
+
+.max-350{
+    width 100%
+    max-width 350px
+}
+
+.thin{
+    font-weight 200;
+}
+
+.bold {
+    font-weight 700
+}
+
+.error{
+    font-size 13px
+    color #c11;
+}
+
+.small-text {
+    font-size 14px
+}
+
+.large-text {
+    font-size 2.4em
+}
+
+.inline-block {
+    display inline-block
 }

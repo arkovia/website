@@ -20,7 +20,6 @@ export default {
         padding-bottom 0
         color: #222
         display flex
-        flex 1 0 auto
         justify-content center
     }
     .maximum{

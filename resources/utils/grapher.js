@@ -31,11 +31,11 @@ export default {
     },
 
     async request(query){
-        let request = (await axios.post(
-            '/graph/',
-            { query: query, variables: {}
-        }))
-
+        let request = await axios.post('https://localhost/graph/', {
+            query,
+            variables: {}
+        })
+        
         return request.data
     }
 }

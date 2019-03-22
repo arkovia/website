@@ -1,41 +1,30 @@
 <template>
     <master>
-        <template slot="title"><slot name="title"/></template>
+        <template slot="title"><slot name="title"></slot></template>
         <template slot="content">
             <div class="body-flex-container">
-                <headerComponent/>
                 <div class="content">
                     <slot name="content"/>
                 </div>
-                <footerComponent/>
             </div>
         </template>
         <template slot="head">
-            <slot name="head"/>
+            <slot name="head"></slot>
         </template>
     </master>
 </template>
 <script>
 import master from "vue/layouts/master.vue"
-import headerComponent from "vue/layouts/includes/header.vue"
-import footerComponent from "vue/layouts/includes/footer.vue"
 
 export default {
     components: {
         master,
-        headerComponent,
-        footerComponent
     },
 }
 </script>
 <style lang="stylus" scoped>
-
-.content-container{
-    flex 1 0 auto
-}
-
 .content{
-    flex 1 0 auto
+    flex 1 0 0
     display flex
     flex-direction column
 }

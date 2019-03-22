@@ -1,10 +1,6 @@
 const Slashed = require('slashed')
 const Router = Slashed.Router
-const https = require('https')
 const jsonifyError = require('jsonify-error')
-const axios = require('axios').create({
-    httpsAgent: new https.Agent({ rejectUnauthorized: false })
-})
 
 var router = new Router()
 
@@ -18,8 +14,7 @@ router.use(async (ctx, next) => {
             })
         }
     } catch (err) {
-        console.log(err)
-        ctx.status = err.status || 500
+        ctx.status = 500
         return await ctx.render('vue/pages/error', {
             code: ctx.status,
             error: jsonifyError(new Error(err))
@@ -28,53 +23,11 @@ router.use(async (ctx, next) => {
 })
 
 router.get('/', async (ctx) => {
-    let signatureCount = (await axios.post('/graph/', {query: `{
-        signatureCount
-    }`, variables: {}})).data.data.signatureCount
-    let signaturesPastWeek = (await axios.post('/graph/', {query: `{
-        signaturesPastWeek
-    }`, variables: {}})).data.data.signaturesPastWeek
-
-    let data = {
-        signatureCount,
-        signaturesPastWeek
-    }
-
-    await ctx.render('vue/pages/home', data)
+    await ctx.render('vue/pages/home')
 })
 
-router.get('/supporter-signup', async (ctx) => {
-    let signatureCount = (await axios.post('/graph/', {query: `{
-        signatureCount
-    }`, variables: {}})).data.data.signatureCount
-    let signaturesPastWeek = (await axios.post('/graph/', {query: `{
-        signaturesPastWeek
-    }`, variables: {}})).data.data.signaturesPastWeek
-
-    let data = {
-        signatureCount,
-        signaturesPastWeek
-    }
-
-    await ctx.render('vue/pages/supporter-signup', data)
+router.get('/learn', async (ctx) => {
+    await ctx.render('vue/pages/learn/index')
 })
-
-router.get('/thanks-for-signing-up', async (ctx) => {
-    let signatureCount = (await axios.post('/graph/', {query: `{
-        signatureCount
-    }`, variables: {}})).data.data.signatureCount
-    let signaturesPastWeek = (await axios.post('/graph/', {query: `{
-        signaturesPastWeek
-    }`, variables: {}})).data.data.signaturesPastWeek
-
-    let data = {
-        signatureCount,
-        signaturesPastWeek
-    }
-    
-    await ctx.render('vue/pages/thanks-for-signing-up', data)
-})
-
-router.use(require('./app'))
 
 module.exports = router

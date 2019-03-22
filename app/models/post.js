@@ -1,5 +1,4 @@
 const connection = require('./connection')
-const gql = require('./gql')
 
 const { Model } = require('moongraph')
 const { ObjectID } = require('mongodb')
@@ -7,7 +6,7 @@ const { ObjectID } = require('mongodb')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
-class User extends Model {
+class Post extends Model {
     static get connection(){
         return connection.getCollection('user')
     }
@@ -16,56 +15,6 @@ class User extends Model {
         let obj = Object.assign({}, this.document)
         
         return obj
-    }
-
-    validateToken(token){
-        let sessions = this.document.sessions
-        if(sessions && sessions.constructor === Array){
-            let dateOffset = (24*60*60*1000) * 20
-            let maxDate = new Date().getTime() + dateOffset
-
-            let match = false
-
-            for(let index in sessions){
-                let session = sessions[index]
-
-                let sessionValidUntil = session.lastUsed + dateOffset
-                
-                if(sessionValidUntil < maxDate){
-                    if(session.token === token){
-                        this.document.sessions[index].lastUsed = new Date().getTime()
-                        this.save()
-
-                        match = true
-
-                        continue
-                    }
-                }else{
-                    delete this.document.sessions[index]
-                    this.save()
-                }
-            }
-
-            if(match) return true
-        }
-
-        return false
-    }
-
-    static async authenticate(token, ctx){
-        let secret = ctx.app.get('env:secret')
-        let decodedToken = jwt.verify(token, secret)
-        
-        if(decodedToken.id){
-            let user = await User.findOne({_id: new ObjectID(decodedToken.id)})
-            if(user.validateToken(token)){
-                return user
-            }
-        }
-
-        return null
-
-        //figure out fail process
     }
     
     static get resolvers(){
@@ -91,7 +40,7 @@ class User extends Model {
                 
                 if(!model) model = await this.findOne({email: input.user.toLowerCase()})
                 if(!model) model = await this.findOne({username: input.user})
-                if(!model) throw Error(`No user found with username or email of '${input.user}'`)
+                if(!model) throw Error(`No user found with username or email of: ${input.user}`)
 
                 let hashedPassword = model.document.password
 
@@ -131,15 +80,11 @@ class User extends Model {
 
     static get graph(){
     return `
-        type User {
+        type Post {
             _id: ObjectID
-            username: String
-            email: String
-            phone: String
-            profile: UserProfile
-            address: String
-            roles: [String]
-            sessions (input: PaginationInput): [UserSession]
+            authors: [User]
+            title: String
+            
         }
 
         interface UserProfile {
@@ -169,4 +114,4 @@ class User extends Model {
     }
 }
 
-module.exports = User
+module.exports = Post

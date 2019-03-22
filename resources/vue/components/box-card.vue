@@ -13,7 +13,8 @@
     padding: 10px;
     margin: 10px
     max-width $desktop
-    border-radius 4px;
+    border 0
+    border-top $theme1 4px solid
     box-shadow 0 0 5px 0 rgba(0,0,0,0.2), 0 3px 5px 0 rgba(0,0,0,0.2)
     width: calc(100% - 20px)
     &.padding-medium{
