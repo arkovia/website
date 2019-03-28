@@ -4,20 +4,36 @@ const graph = require('../app/graph')
 const User = require('../app/models/user')
 var router = new Router()
 
+
+let ensuredIndexes = false
+
 router.use(async (ctx, next) => {
     try {
         await next()
     } catch (err) {
         console.log(err)
-        ctx.body = JSON.stringify(err)
+        ctx.body = {data: null, errors: JSON.stringify(err)}
     }
 })
 
 router.use(async (ctx, next) => {
-    let authorization = ctx.request.header.authorization
+    if(ensuredIndexes === false){
+        let arr = [require('../app/models/user')]
+
+        for(let i in arr){
+            let model = arr[i]
+            await model.createIndexes()
+        }
+        
+        ensuredIndexes === true
+    }
+    await next()
+})
+
+router.use(async (ctx, next) => {
+    let token = ctx.request.header.token
     
-    if(authorization){
-        let token = authorization.substr(7)
+    if(token){
         let user = await User.authenticate(token, ctx)
         if(user){
             ctx.state.user = user

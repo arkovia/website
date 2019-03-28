@@ -1,6 +1,6 @@
 <template>
     <div class="hero" :style=heroImage>
-        <slot></slot>
+        <slot/>
     </div>
 </template>
 <script>
@@ -25,7 +25,7 @@ export default {
         color: white
     }
     &.img{
-        background: #333
+        background: #222;
         color: white
         background-position: center;
         background-repeat: no-repeat;
@@ -35,6 +35,23 @@ export default {
         margin: auto 
         max-width $desktop
         width: 100%
+        &.page {
+            background: white;
+            box-shadow: 0 0 4px 0 rgba(0,0,0,0.25)
+            padding: 20px 50px;
+            @media (max-width: $laptop) {
+                padding: 20px 40px;
+            }
+            @media (max-width: $tablet) {
+                padding: 10px;
+            }
+        }
+        &.larger-text {
+            font-size: 1.2em;
+            @media (max-width: $tablet) {
+                font-size: 1.1em;
+            }
+        }
         &.padding-none {
             padding 10px
         }

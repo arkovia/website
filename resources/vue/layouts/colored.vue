@@ -1,12 +1,12 @@
 <template>
     <master>
-        <template slot="title"><slot name="title"></slot></template>
+        <template slot="title"><slot name="title"/></template>
         <template slot="head">
-            <slot name="head"></slot>
+            <slot name="head"/>
         </template>
         <template slot="content">
             <div class="colored">
-                <slot name="content"></slot>
+                <slot name="content"/>
             </div>
         </template>
     </master>

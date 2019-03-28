@@ -1,13 +1,13 @@
 <template>
     <servue>
         <template slot="content">
-            <slot name="content"></slot>
+            <slot name="content"/>
         </template>
         <template slot="head">
             <title>{{ title }}</title>
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <meta name="theme-color" content="#009CB5">
-            <slot name="description"></slot>
+            <slot name="description"/>
             <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,700" rel="stylesheet">
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
             <script>
@@ -42,18 +42,19 @@
             <link rel="icon" type="image/png" href="/images/favicons/favicon-32x32.png" sizes="32x32" />
             <link rel="icon" type="image/png" href="/images/favicons/favicon-16x16.png" sizes="16x16" />
             <link rel="icon" type="image/png" href="/images/favicons/favicon-128.png" sizes="128x128" />
-            <meta name="application-name" content="&nbsp;"/>
+            <meta name="application-name" content="Arkovia"/>
             <meta name="msapplication-TileColor" content="#FFFFFF" />
-            <meta name="msapplication-TileImage" content="mstile-144x144.png" />
-            <meta name="msapplication-square70x70logo" content="mstile-70x70.png" />
-            <meta name="msapplication-square150x150logo" content="mstile-150x150.png" />
-            <meta name="msapplication-wide310x150logo" content="mstile-310x150.png" />
-            <meta name="msapplication-square310x310logo" content="mstile-310x310.png" />
+            <meta name="msapplication-TileImage" content="/images/favicons/mstile-144x144.png" />
+            <meta name="msapplication-square70x70logo" content="/images/favicons/mstile-70x70.png" />
+            <meta name="msapplication-square150x150logo" content="/images/favicons/mstile-150x150.png" />
+            <meta name="msapplication-wide310x150logo" content="/images/favicons/mstile-310x150.png" />
+            <meta name="msapplication-square310x310logo" content="/images/favicons/mstile-310x310.png" />
             <link rel="manifest" href="/manifest.json">
             <meta name="msapplication-TileColor" content="#ffffff">
             <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
             <meta name="theme-color" content="#ffffff">
-            <slot name="head"></slot>
+
+            <slot name="head"/>
         </template>
     </servue>
 </template>

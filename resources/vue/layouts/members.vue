@@ -1,16 +1,16 @@
 <template>
     <master>
-        <template slot="title"><slot name="title"></slot></template>
+        <template slot="title"><slot name="title"/></template>
         <template slot="content">
             <div class="body-flex-container">
-                <membersHeader></membersHeader>
+                <membersHeader/>
                 <div class="content">
                     <slot name="content"/>
                 </div>
             </div>
         </template>
         <template slot="head">
-            <slot name="head"></slot>
+            <slot name="head"/>
         </template>
     </master>
 </template>

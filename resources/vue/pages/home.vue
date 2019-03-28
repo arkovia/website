@@ -22,7 +22,7 @@
                                 <p>We are looking for risk-taking, intuitive, smart and passionate citizens who want to create a new life in Arkovia. Citizens can help the nation build through muscle, intellect, enterprise, finance or networking</p>
                             </div>
                             <div>
-                                <buttonspecial href="/supporter-signup" class="margin">Start Helping</buttonspecial>
+                                <buttonspecial href="/start" class="margin">Start Helping</buttonspecial>
                             </div>
                         </div>
                         <div class="flex-center-all">
@@ -35,16 +35,6 @@
                                 <div style="color: #5f5; padding-right: 5px">+ {{ newCitizensPastWeek }}</div>
                                 <div>this week</div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </hero>
-            <hero class="padding-small">
-                <div class="inner-hero">
-                    <div class="flex-center align-center">
-                        <h2>What is Arkovia?</h2>
-                        <div>
-                            <buttonspecial href="/learn" class="margin">Start Learning</buttonspecial>
                         </div>
                     </div>
                 </div>

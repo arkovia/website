@@ -1,9 +1,9 @@
-const koastatic = require('koa-static')
 const slashed = require('slashed')
 const servue = require('./extends/servue')
 const sslify = require('koa-sslify').default
-const path = require('path')
+const serve = require('koa-static')
 const https = require('https')
+const path = require('path')
 const http = require('http')
 const fs = require('fs')
 
@@ -17,7 +17,7 @@ app.extend(servue)
  * Middleware
  */
 app.use(sslify())
-app.use(koastatic(app.get('path:resources/public')))
+app.use(serve(app.get('path:resources/public')))
 app.use(require('koa-bodyparser')())
 
 /**

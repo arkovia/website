@@ -14,6 +14,8 @@ class User extends Model {
 
     get transform(){
         let obj = Object.assign({}, this.document)
+
+        //sessions
         
         return obj
     }
@@ -75,16 +77,30 @@ class User extends Model {
 
                 if(model === null) return null
             },
-            createUser: async ({input}) => {
+            createUser: async ({input}, ctx) => {
                 input.email = input.email.toLowerCase()
                 input.password = await bcrypt.hash(input.password, 12)
                 input.sessions = []
+                input.roles = []
                 
                 let model = new User(input)
 
-                await model.save()
+                let secret = ctx.app.get('env:secret')
+                let session = {
+                    token: jwt.sign({id: String(model.document._id)}, secret),
+                    lastUsed: new Date().getTime()
+                }
 
-                return model.transform
+                model.document.sessions.push(session)
+                try {
+                    await model.save()
+                } catch (error) {
+                    console.log(error)
+                    throw error
+                }
+                
+
+                return session.token
             },
             loginUser: async({input}, ctx) => {
                 let model
@@ -104,7 +120,7 @@ class User extends Model {
                         lastUsed: new Date().getTime()
                     }
                     model.document.sessions.push(session)
-                    model.save()
+                    await model.save()
                     return session.token
                 }
                 throw Error(`Password is incorrect`)
@@ -115,24 +131,33 @@ class User extends Model {
     static get mutation(){
         return `
             loginUser(input: UserLoginInput): String
-            createUser(input: UserCreate): User
+            createUser(input: UserCreate): String
         `
     }
 
     static get query(){
-        /**
-            signatures: [Signature]
-            signature(id: ObjectID): Signature
-         */
         return `
-            me: User
+            me: User @isAuthenticated
         `
     }
 
+    static async createIndexes(){
+        return await super.createIndexes({
+            username: {
+                unique: true
+            },
+            email: {
+                unique: true
+            }
+        })
+    }
+
     static get graph(){
-    return `
+    return gql`
         type User {
             _id: ObjectID
+            firstName: String
+            lastName: String
             username: String
             email: String
             phone: String
@@ -143,8 +168,6 @@ class User extends Model {
         }
 
         interface UserProfile {
-            firstName: String
-            lastName: String
             dateOfBirth: String
         }
 
@@ -154,11 +177,11 @@ class User extends Model {
         }
 
         input UserCreate {
+            firstName: String!
+            lastName: String!
             username: String!
             email: String!
             password: String!
-            phone: String
-            address: String
         }
 
         input UserLoginInput {

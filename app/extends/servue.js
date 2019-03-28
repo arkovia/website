@@ -22,7 +22,8 @@ module.exports = function(app){
          * @returns {Promise<string>}
          */
         ctx.render = async(vueFile, data) => {
-            ctx.body = await servue.render(vueFile, data)
+            let mergedData = Object.assign({ctx}, data)
+            ctx.body = await servue.render(vueFile, mergedData)
         }
     
         await next()

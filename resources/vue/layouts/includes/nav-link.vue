@@ -1,5 +1,5 @@
 <template>
-    <a class="nav-link" :href="href" :class="{ active: isActive() }"><slot></slot></a> 
+    <a class="nav-link" :href="href" :class="{ active: isActive() }"><slot/></a> 
 </template>
 <script>
 export default {
@@ -7,7 +7,12 @@ export default {
     methods: {
         isActive(){
             if(this.$isServer) return false
-            return window.location.pathname === this.href
+            if(this.href === '/'){
+                return this.href == window.location.pathname
+            }else{
+                let regex = `^${this.href}(.*)`
+                return RegExp(regex).test(window.location.pathname)
+            }
         }
     },
     mounted(){

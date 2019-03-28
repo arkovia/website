@@ -41,7 +41,7 @@
                                     autocomplete="password"
                                     undertext="Enter password"
                                     :v="$v.form.password"
-                                    :error="this.$v.form.password.$error ? 'You must enter your full name' : undefined"
+                                    :error="this.$v.form.password.$error ? 'You must enter your password' : undefined"
                                 />
 
                                 <div class="margin-top-bottom align-center">
@@ -52,7 +52,7 @@
                                     <a href="#" class="bold">Forgot login details?</a>
                                 </p>
                                 <p class="small-text align-center">
-                                    Don't have an account? <a href="/start" class="bold">Sign up</a>
+                                    Don't have an account? <a href="/start" class="bold">Start now.</a>
                                 </p>
                                 
                             </div>
@@ -123,11 +123,12 @@ export default {
 
             if(request.errors){
                 this.errors = request.errors
+                console.log(request.errors)
             }else if(request.data){
                 let token = request.data.loginUser
                 if(token){
                     setCookie('token', token)
-                    window.location.href = '/members'
+                    window.location.href = '/app'
                     return
                 }
             }

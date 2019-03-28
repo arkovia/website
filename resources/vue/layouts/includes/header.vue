@@ -7,7 +7,7 @@
                     <div class="logo-text">Arkovia</div>
                 </a>
                 <div class="end margin-sides row flex-center-all">
-                    <roundbutton href="/login" class="trans-white margin-sides">Sign In</roundbutton>
+                    <roundbutton href="/sign-in" class="trans-white margin-sides">Sign In</roundbutton>
                     <roundbutton href="/start" class="white">Start</roundbutton>
                 </div>
             </div>
@@ -128,7 +128,7 @@ header {
     color white
     .logo-text{
         font-size 2em
-        font-weight 700
+        font-weight 200
         @media(max-width $smallphone){
             font-size: 1.3em
         }

@@ -9,7 +9,7 @@ module.exports = {
 
         if(ctx.cookie.token){
             config.headers = {
-                "authorization": `Bearer ${ctx.cookie.token}`
+                "token": ctx.cookie.token
             }
         }
 
