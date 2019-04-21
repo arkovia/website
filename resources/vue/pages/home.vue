@@ -52,8 +52,8 @@ import grapher from "utils/grapher"
 export default {
     async asyncData() {
         return {
-            citizenCount: 200,
-            newCitizensPastWeek: 10
+            citizenCount: 181,
+            newCitizensPastWeek: 8
         }
         
         let { citizenCount, newCitizensPastWeek } = (await grapher.request(`{

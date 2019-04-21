@@ -4,9 +4,9 @@
             <div class="mid-footer">
                 <div class="motto">The Innovation Nation</div>
                 <div class="social-links">
-                    <a href="https://facebook.com/facebook" class="social-link"><img src="/images/facebook.png" alt="Arkovia Facebook"></a>
+                    <a href="https://facebook.com/arkovia" class="social-link"><img src="/images/facebook.png" alt="Arkovia Facebook"></a>
                     <a href="https://twitter.com/arkovia" class="social-link"><img src="/images/twitter.png" alt="Arkovia Twitter"></a>
-                    <a href="https://instagram.com/instagram" class="social-link"><img src="/images/instagram.png" alt="Arkovia Instagram"></a>
+                    <a href="https://instagram.com/arkovia" class="social-link"><img src="/images/instagram.png" alt="Arkovia Instagram"></a>
                 </div>
             </div>
             <div class="bottom-footer">

@@ -3,9 +3,26 @@ const gql = require('./gql')
 
 const { Model } = require('moongraph')
 const { ObjectID } = require('mongodb')
-
+const { createCanvas } = require("canvas");
+const convert = require('color-convert')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+
+function generateDisplayPicture(initials){
+    let canvas = createCanvas(100, 100);
+    let canvasctx = canvas.getContext("2d");
+
+    canvasctx.arc(50, 50, 50, 0, 2 * Math.PI);
+    canvasctx.fillStyle = `#${convert.hsv.hex(Math.random() * 360, 86, 50)}`
+    canvasctx.fill();
+
+    canvasctx.font = "35px Arial";
+    canvasctx.textAlign = "center";
+    canvasctx.textBaseline = "middle";
+    canvasctx.fillStyle = "#fff";
+    canvasctx.fillText(initials, 50, 50);
+    return canvas.toDataURL()
+}
 
 class User extends Model {
     static get connection(){
@@ -14,6 +31,8 @@ class User extends Model {
 
     get transform(){
         let obj = Object.assign({}, this.document)
+
+
 
         //sessions
         
@@ -72,10 +91,18 @@ class User extends Model {
     
     static get resolvers(){
         return {
-            me: async ({id}) => {
-                if(id) return (await this.findOne({_id: new ObjectID(id)})).transform
+            me: async ({id}, ctx) => {
+                let model = null
+                if(id){
+                    model = (await this.findOne({_id: new ObjectID(id)}))
+                }else{
+                    if(ctx.state.user){
+                        model = ctx.state.user
+                    }
+                }
 
-                if(model === null) return null
+                if(model) return model.transform
+                return model
             },
             createUser: async ({input}, ctx) => {
                 input.email = input.email.toLowerCase()
@@ -92,13 +119,12 @@ class User extends Model {
                 }
 
                 model.document.sessions.push(session)
+
                 try {
                     await model.save()
                 } catch (error) {
-                    console.log(error)
                     throw error
                 }
-                
 
                 return session.token
             },
@@ -108,6 +134,13 @@ class User extends Model {
                 if(!model) model = await this.findOne({email: input.user.toLowerCase()})
                 if(!model) model = await this.findOne({username: input.user})
                 if(!model) throw Error(`No user found with username or email of '${input.user}'`)
+
+                if(!model.document.displayPicture){
+                    let doc = model.document
+                    let initials = `${doc.firstName.substr(0, 1) + doc.lastName.substr(0,1)}`
+                    model.document.displayPicture = generateDisplayPicture(initials)
+                    await model.save()
+                }
 
                 let hashedPassword = model.document.password
 
@@ -165,6 +198,7 @@ class User extends Model {
             address: String
             roles: [String]
             sessions (input: PaginationInput): [UserSession]
+            displayPicture: String
         }
 
         interface UserProfile {

@@ -1,35 +1,29 @@
 <template>
-    <members>
-        <template slot="title">Members</template>
+    <app>
+        <template slot="title">myArk</template>
         <template slot="content">
-            <h2>Hello {{ firstName }} </h2>
-            
+            <hero>
+                <div class="inner-hero dark">
+                    <h1>Hello {{ me.firstName }} </h1>
+                </div>
+            </hero>
         </template>
-    </members>
+    </app>
 </template>
 <script>
-import members from "vue/layouts/members.vue"
-import grapher from "utils/grapher.js"
+import app from "vue/layouts/app.vue"
+import grapher from "utils/grapher"
+import hero from "vue/layouts/hero.vue"
 
 export default {
-    async asyncData(ctx){
-        let token = ctx.state.token
-        
-        let { data, errors } = (await grapher.request(`{
-            me {
-                firstName
-                lastName
-                email
-                username
-            }
-        }`, token))
-
-        if(errors) console.log(errors)
-
-        return data
+    computed: {
+        me(){
+            return this.$store.state.me
+        }
     },
     components: {
-        members
+        app,
+        hero
     }
 }
 </script>

@@ -63,8 +63,8 @@ class Post extends Model {
 
     static get mutation(){
         return `
-            loginUser(input: UserLoginInput): String
-            createUser(input: UserCreate): User
+            createPost(input: UserLoginInput): String
+            deletePost(input: UserCreate): User
         `
     }
 
@@ -74,41 +74,16 @@ class Post extends Model {
             signature(id: ObjectID): Signature
          */
         return `
-            me: User
+            post: User
         `
     }
 
     static get graph(){
-    return `
+    return gql`
         type Post {
             _id: ObjectID
             authors: [User]
             title: String
-            
-        }
-
-        interface UserProfile {
-            firstName: String
-            lastName: String
-            dateOfBirth: String
-        }
-
-        type UserSession {
-            lastUsed: String
-            agent: String
-        }
-
-        input UserCreate {
-            username: String!
-            email: String!
-            password: String!
-            phone: String
-            address: String
-        }
-
-        input UserLoginInput {
-            user: String!
-            password: String!
         }
         `
     }

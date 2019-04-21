@@ -12,17 +12,18 @@ router.use(async (ctx, next) => {
     try {
         await next()
         if(ctx.body === undefined){ //no page found
-            ctx.status = ctx.status || 404
-            return await ctx.render('vue/pages/error', {
-                code: 404,
-            })
+            ctx.status = 404
+            return await ctx.render('vue/pages/error', { data: {
+                code: ctx.status,
+            }})
         }
     } catch (err) { //error page
         ctx.status = 500
-        return await ctx.render('vue/pages/error', {
+        console.error(err)
+        return await ctx.render('vue/pages/error', { data: {
             code: ctx.status,
             error: jsonifyError(new Error(err))
-        })
+        }})
     }
 }).get('/', async (ctx) => {
     await ctx.render('vue/pages/home')

@@ -13,7 +13,6 @@
                     <div class='flex flex-center wrap row'>
                         <boxcard href="/services/myark">
                             <div class="row margin-bottom">
-                                <img class="box-card-image" style="stoke: blue; fill:red;" src="/images/services/myark.svg">
                                 <h2 class="bold">myArk EGI</h2>
                             </div>
                             <div class="box-text">
@@ -23,7 +22,6 @@
 
                         <boxcard href="/services/arkbank">
                             <div class="row margin-bottom">
-                                <img class="box-card-image" src="/images/services/arkbank.svg">
                                 <h2 class="bold">ArkBank EGI</h2>
                             </div>
                             <div class="box-text">
@@ -33,7 +31,6 @@
 
                         <boxcard href="/services/cinvir">
                             <div class="row margin-bottom">
-                                <img class="box-card-image" src="/images/services/cinvir.png">
                                 <h2 class="bold">Cinvir EGI</h2>
                             </div>
                             <div class="box-text">
@@ -43,7 +40,6 @@
 
                         <boxcard href="/services/business">
                             <div class="row margin-bottom">
-                                <img class="box-card-image" src="/images/services/business.png">
                                 <h2 class="bold">Business EGI</h2>
                             </div>
                             <div class="box-text">
@@ -53,7 +49,6 @@
 
                         <boxcard href="/services/health">
                             <div class="row margin-bottom">
-                                <img class="box-card-image" src="/images/services/health.png">
                                 <h2 class="bold">Health EGI</h2>
                             </div>
                             <div class="box-text">
@@ -63,7 +58,6 @@
 
                         <boxcard href="/services/jobs">
                             <div class="row margin-bottom">
-                                <img class="box-card-image" src="/images/services/jobs.png">
                                 <h2 class="bold">Jobs EGI</h2>
                             </div>
                             <div class="box-text">
@@ -73,7 +67,6 @@
 
                         <boxcard href="/services/licensing">
                             <div class="row margin-bottom">
-                                <img class="box-card-image" src="/images/services/licensing.png">
                                 <h2 class="bold">Licensing EGI</h2>
                             </div>
                             <div class="box-text">
@@ -82,7 +75,6 @@
                         </boxcard>
                         <boxcard href="/services/education">
                             <div class="row margin-bottom">
-                                <img class="box-card-image" src="/images/services/education.png">
                                 <h2 class="bold">Education EGI</h2>
                             </div>
                             <div class="box-text">
@@ -91,7 +83,6 @@
                         </boxcard>
                         <boxcard href="/services/tourism">
                             <div class="row margin-bottom">
-                                <img class="box-card-image" src="/images/services/tourism.png">
                                 <h2 class="bold">Tourism EGI</h2>
                             </div>
                             <div class="box-text">
@@ -100,7 +91,6 @@
                         </boxcard>
                         <boxcard href="/services/tax">
                             <div class="row margin-bottom">
-                                <img class="box-card-image" src="/images/services/tax.png">
                                 <h2 class="bold">Tax EGI</h2>
                             </div>
                             <div class="box-text">

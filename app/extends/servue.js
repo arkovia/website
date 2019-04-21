@@ -21,9 +21,9 @@ module.exports = function(app){
          * @param {Object=} [data={}] - data to be inserted into .vue file when generating renderer
          * @returns {Promise<string>}
          */
-        ctx.render = async(vueFile, data) => {
-            let mergedData = Object.assign({ctx}, data)
-            ctx.body = await servue.render(vueFile, mergedData)
+        ctx.render = async(vueFile, ssrContext = {}) => {
+
+            ctx.body = await servue.render(vueFile, {ctx, ...ssrContext})
         }
     
         await next()

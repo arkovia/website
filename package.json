@@ -8,9 +8,12 @@
         "apollo-server-koa": "^2.4.8",
         "axios": "^0.18.0",
         "bcrypt": "^3.0.4",
+        "canvas": "^2.4.1",
+        "color-convert": "^2.0.0",
         "graphiql": "^0.12.0",
         "graphql": "^14.1.1",
         "graphql-directive": "^0.2.1",
+        "hsv-rgb": "^1.0.0",
         "js-cookie": "^2.2.0",
         "jsonify-error": "^1.4.4",
         "jsonwebtoken": "^8.5.0",
@@ -22,7 +25,7 @@
         "moment": "^2.24.0",
         "moongraph": "~0.0.13",
         "serve-static": "^1.13.2",
-        "servue": "^1.2",
+        "servue": "^2.1.1",
         "signature_pad": "^3.0.0-beta.3",
         "slashed": "^3.0.2",
         "stylus": "^0.54.5",
@@ -31,9 +34,7 @@
         "vue-mq": "^1.0.1",
         "vue-server-renderer": "^2.6.8",
         "vue-template-compiler": "^2.6.8",
-        "vuelidate": "^0.7.4"
-    },
-    "devDependencies": {
-        "browser-sync-webpack-plugin": "^2.2.2"
+        "vuelidate": "^0.7.4",
+        "vuex": "^3.1.0"
     }
 }

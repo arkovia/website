@@ -11,18 +11,18 @@ var router = new Router()
 router.use('/app', async (ctx, next) => {
     try {
         await next()
-        if(ctx.body === undefined){ //no page found
-            ctx.status = ctx.status || 404
-            return await ctx.render('vue/pages/error', {
-                code: 404,
-            })
+        if(ctx.body === undefined){ //no page found or no response given
+            ctx.status = 404
+            return await ctx.render('vue/pages/error', { data: {
+                code: ctx.status
+            }})
         }
     } catch (err) { //error page
         ctx.status = 500
-        return await ctx.render('vue/pages/error', {
+        return await ctx.render('vue/pages/error', { data: {
             code: ctx.status,
             error: jsonifyError(new Error(err))
-        })
+        }})
     }
 }).get('/sign-in', async (ctx) => {
     if(ctx.cookie && ctx.cookie.token){
@@ -30,19 +30,20 @@ router.use('/app', async (ctx, next) => {
             return ctx.redirect('/app')
         }
     }
-    await ctx.render('vue/pages/myark/sign-in')
+    await ctx.render('vue/pages/app/sign-in')
 }).get('/sign-up', async (ctx) => {
     if(ctx.cookie && ctx.cookie.token){
         if(User.authenticate(ctx.cookie.token, ctx)){
             return ctx.redirect('/app')
         }
     }
-    await ctx.render('vue/pages/myark/sign-up')
-}).use('/app/', async (ctx, next) => {
+    await ctx.render('vue/pages/app/sign-up')
+}).use('/app', async (ctx, next) => {
     if(ctx.cookie.token){
         let user = await User.authenticate(ctx.cookie.token, ctx)
         if(user){
             ctx.state.user = user
+            ctx.state.token = ctx.cookie.token
             return await next()
         }
     }
