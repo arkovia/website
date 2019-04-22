@@ -17,6 +17,7 @@
 <script>
 import master from "vue/layouts/master.vue"
 import headerComponent from "vue/layouts/includes/app/header.vue"
+import { gqlreq, inputify } from "utils/grapher"
 import Vue from "vue"
 
 let state = Vue.observable({
@@ -36,12 +37,13 @@ Vue.mixin({
     }
 })
 
+
 export default {
     async serverPrefetch(){
         let { ctx } = this.$ssrContext
         let { token } = ctx.state
         
-        let { data, errors } = await grapher.request(`{
+        let { data, errors } = await gqlreq(`{
             me {
                 firstName
                 lastName

@@ -3,7 +3,8 @@ import axios from "axios"
 function getValue(value) {
     if (value === undefined) return null
     if (value.constructor === Object) return inputifyObject(value)
-    if (value.constructor === Array) return `[${value.map(val => getValue(val)).split(', ')}]`
+    if (value.constructor === Array) return [`${ value.map(val => getValue(val))}`]
+
     return JSON.stringify(value)
 }
 
@@ -42,24 +43,22 @@ function getCookie(cname) {
 }
 
 
-export default {
-    inputify(data) {
+export function inputify(data){
         return inputifyObject(data)
-    },
-
-    async request(query, token) {
-        let config = {}
-        if(token){
-            config.headers = {
-                token: token
-            }
-        }
-
-        let request = await axios.post('https://localhost/graph/', {
-            query,
-            variables: {}
-        }, config)
-
-        return request.data
     }
+
+export async function qlreq(query, token) {
+    let config = {}
+    if(token){
+        config.headers = {
+            token: token
+        }
+    }
+
+    let request = await axios.post('https://localhost/graph/', {
+        query,
+        variables: {}
+    }, config)
+
+    return request.data
 }
