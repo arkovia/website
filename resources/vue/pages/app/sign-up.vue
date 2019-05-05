@@ -92,7 +92,7 @@ import card from "vue/components/card.vue"
 import { validationMixin } from "vuelidate"
 import { required } from "vuelidate/lib/validators"
 import formInput from "vue/controls/input.vue"
-import grapher from "utils/grapher"
+import { inputify, gqlreq } from "utils/grapher"
 
 function setCookie(name, value){
     document.cookie = `${name}=${value};path=/;`
@@ -145,9 +145,9 @@ export default {
                 return
             }
 
-            let input = grapher.inputify(this.form)
+            let input = inputify(this.form)
 
-            let request = await grapher.request(`
+            let request = await gqlreq(`
             mutation {
                 createUser(input: ${input})
             }
