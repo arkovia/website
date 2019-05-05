@@ -22,7 +22,6 @@ module.exports = function(app){
          * @returns {Promise<string>}
          */
         ctx.render = async(vueFile, ssrContext = {}) => {
-
             ctx.body = await servue.render(vueFile, {ctx, ...ssrContext})
         }
     

@@ -26,7 +26,7 @@ function inputifyObject(object) {
     return string
 }
 
-function getCookie(cname) {
+export function getCookie(cname) {
     var name = cname + "=";
     var decodedCookie = decodeURIComponent(window.cookie);
     var ca = decodedCookie.split(';');
@@ -47,7 +47,9 @@ export function inputify(data){
     return inputifyObject(data)
 }
 
-export async function gqlreq(query, token) {
+export async function gqlreq(query, ctx) {
+    let { token } = ctx.state
+    let domain = ctx.app.get('env:domain')
     let config = {}
 
     if(token){
@@ -55,8 +57,7 @@ export async function gqlreq(query, token) {
             token
         }
     }
-
-    let request = await axios.post('//graph/', {
+    let request = await axios.post(`https://${domain}/graph/`, {
         query,
         variables: {}
     }, config)
