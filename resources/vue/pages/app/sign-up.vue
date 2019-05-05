@@ -68,7 +68,7 @@
                                 />
 
                                 <div class="margin-top-bottom align-center">
-                                    <button-round :locked="submitted" @click.native="signIn()" class="margin">Sign Up</button-round>
+                                    <button-round :locked="submitted" @click.native="signUp()" class="margin">Sign Up</button-round>
                                 </div>
 
                                 <p class="small-text align-center">
@@ -133,7 +133,7 @@ export default {
         }
     },
     methods: {
-        async signIn(){
+        async signUp(){
             if(this.submitted === true) return
             this.submitted = true
             this.error = undefined

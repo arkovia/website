@@ -21,7 +21,9 @@ module.exports = function(app){
          * @param {Object=} [data={}] - data to be inserted into .vue file when generating renderer
          * @returns {Promise<string>}
          */
+        ctx.state.domain = app.get('env:domain')
         ctx.render = async(vueFile, ssrContext = {}) => {
+            ssrContext.data.domain = app.get('env:domain')
             ctx.body = await servue.render(vueFile, {ctx, ...ssrContext})
         }
     
