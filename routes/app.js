@@ -46,8 +46,12 @@ router.use('/app', async (ctx, next) => {
             ctx.state.token = ctx.cookie.token
             return await next()
         }
+        ctx.cookies.set('token', null)
     }
     ctx.redirect('/sign-in')
+}).get('/sign-out', async(ctx) => {
+    ctx.state.user.signOut(ctx.state.token)
+    ctx.redirect('/')
 }).get('/app', async (ctx) => {
     await ctx.render('vue/pages/app/index')
 })

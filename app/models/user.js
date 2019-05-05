@@ -13,30 +13,40 @@ function generateDisplayPicture(initials){
     let canvasctx = canvas.getContext("2d");
 
     canvasctx.arc(50, 50, 50, 0, 2 * Math.PI);
-    canvasctx.fillStyle = `#${convert.hsv.hex(Math.random() * 360, 86, 50)}`
+    canvasctx.fillStyle = `#${convert.hsv.hex(Math.random() * 360, 90, 70)}`
     canvasctx.fill();
 
-    canvasctx.font = "35px Arial";
+    canvasctx.font = "50px Ubuntu";
     canvasctx.textAlign = "center";
     canvasctx.textBaseline = "middle";
     canvasctx.fillStyle = "#fff";
     canvasctx.fillText(initials, 50, 50);
     return canvas.toDataURL()
 }
-
 class User extends Model {
     static get connection(){
         return connection.getCollection('user')
     }
 
     get transform(){
-        let obj = Object.assign({}, this.document)
-
-
-
-        //sessions
+        let obj = {...this.document}
         
         return obj
+    }
+
+    async deleteToken(token){
+        let sessions = this.document.sessions
+
+        let match = false
+
+        this.document.sessions = sessions.filter((session)=>{
+            if(session.token !== token) return session
+            match = true
+        })
+        
+        await this.save()
+
+        return match
     }
 
     validateToken(token){
@@ -73,6 +83,24 @@ class User extends Model {
         return false
     }
 
+    async createToken(ctx){
+        let secret = ctx.app.get('env:secret')
+        let session = {
+            token: jwt.sign({id: String(this.document._id)}, secret),
+            lastUsed: new Date().getTime()
+        }
+
+        this.document.sessions.push(session)
+
+        try {
+            await this.save()
+        } catch (error) {
+            throw error
+        }
+
+        return session.token
+    }
+
     static async authenticate(token, ctx){
         let secret = ctx.app.get('env:secret')
         let decodedToken = jwt.verify(token, secret)
@@ -91,42 +119,40 @@ class User extends Model {
     
     static get resolvers(){
         return {
-            me: async ({id}, ctx) => {
+            me: async ({}, ctx) => {
                 let model = null
-                if(id){
-                    model = (await this.findOne({_id: new ObjectID(id)}))
-                }else{
-                    if(ctx.state.user){
-                        model = ctx.state.user
-                    }
+                if(ctx.state.user){
+                    model = ctx.state.user
                 }
 
                 if(model) return model.transform
                 return model
             },
+            signOut: async ({input}, ctx) => {
+                let model = ctx.state.user
+                let { token } = input
+
+                if(!model) throw new Error('You must be logged in to delete a token')
+                if(!token) throw new Error('You must provide a token')
+
+                return await model.deleteToken(token)
+            },
             createUser: async ({input}, ctx) => {
+                let userBoilerPlate = {
+                    sessions: [],
+                    roles: []
+                }
+
                 input.email = input.email.toLowerCase()
                 input.password = await bcrypt.hash(input.password, 12)
-                input.sessions = []
-                input.roles = []
-                
-                let model = new User(input)
 
-                let secret = ctx.app.get('env:secret')
-                let session = {
-                    token: jwt.sign({id: String(model.document._id)}, secret),
-                    lastUsed: new Date().getTime()
-                }
+                let userObject = Object.assign(userBoilerPlate, input)
 
-                model.document.sessions.push(session)
+                let model = new User(userObject)
 
-                try {
-                    await model.save()
-                } catch (error) {
-                    throw error
-                }
+                let token = model.createToken(ctx)
 
-                return session.token
+                return token
             },
             loginUser: async({input}, ctx) => {
                 let model
@@ -142,19 +168,12 @@ class User extends Model {
                     await model.save()
                 }
 
-                let hashedPassword = model.document.password
+                let { password } = model.document
 
-                let match = await bcrypt.compare(input.password, hashedPassword)
+                let match = await bcrypt.compare(input.password, password)
                 
-                if(match){ 
-                    let secret = ctx.app.get('env:secret')
-                    let session = {
-                        token: jwt.sign({id: String(model.document._id)}, secret),
-                        lastUsed: new Date().getTime()
-                    }
-                    model.document.sessions.push(session)
-                    await model.save()
-                    return session.token
+                if(match){
+                    return model.createToken(ctx)
                 }
                 throw Error(`Password is incorrect`)
             }
@@ -165,6 +184,7 @@ class User extends Model {
         return `
             loginUser(input: UserLoginInput): String
             createUser(input: UserCreate): String
+            signOut(input: UserToken): Boolean
         `
     }
 
@@ -221,6 +241,10 @@ class User extends Model {
         input UserLoginInput {
             user: String!
             password: String!
+        }
+
+        input UserToken {
+            token: String
         }
         `
     }

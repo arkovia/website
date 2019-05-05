@@ -47,7 +47,7 @@ import parent from "vue/layouts/parent.vue"
 import buttonspecial from "vue/controls/button-special.vue"
 import hero from "vue/layouts/hero.vue"
 import progressBar from "vue/components/progressBar.vue"
-import grapher from "utils/grapher"
+import { gqlreq } from "utils/grapher"
 
 export default {
     async asyncData() {
@@ -56,15 +56,14 @@ export default {
             newCitizensPastWeek: 8
         }
         
-        let { citizenCount, newCitizensPastWeek } = (await grapher.request(`{
+        let { data, errors } = await gqlreq(`{
             citizenCount
             newCitizensPastWeek
-        }`)).data
+        }`)
 
-        return {
-            citzenCount,
-            newCitizensPastWeek
-        }
+        if(errors) throw errors
+
+        return { citizenCount, newCitizensPastWeek } = data
     },
     components: {
         hero,

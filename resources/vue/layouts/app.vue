@@ -18,9 +18,10 @@
 import master from "vue/layouts/master.vue"
 import headerComponent from "vue/layouts/includes/app/header.vue"
 import { gqlreq, inputify } from "utils/grapher"
-import Vue from "vue"
+import statizer from "statizer"
 
-let state = Vue.observable({
+statizer({
+    token: null,
     me: {
         firstName: null,
         lastName: null,
@@ -29,14 +30,6 @@ let state = Vue.observable({
         displayPicture: null
     }
 })
-
-Vue.mixin({
-    beforeCreate(){
-        this.$state = state
-        this.$ssrContext.state = state
-    }
-})
-
 
 export default {
     async serverPrefetch(){
@@ -53,9 +46,10 @@ export default {
             }
         }`, token)
 
-        if(errors) console.log(errors)
+        if(errors) throw errors
 
         this.$state.me = data.me
+        this.$state.token = token
     },
     components: {
         master,

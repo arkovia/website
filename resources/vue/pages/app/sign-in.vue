@@ -15,7 +15,7 @@
                                 <div class="logo-text">Arkovia</div>
                             </div>
 
-                            <div class="inner-card flex-column max-350">
+                            <form class="inner-card flex-column max-350">
 
                                 <h2 class="align-center">Sign In</h2>
                                 <div v-if="errors" >
@@ -55,7 +55,7 @@
                                     Don't have an account? <a href="/start" class="bold">Start now.</a>
                                 </p>
                                 
-                            </div>
+                            </form>
                         </card>
                     </div>
                 </div>
@@ -72,11 +72,7 @@ import card from "vue/components/card.vue"
 import { validationMixin } from "vuelidate"
 import { required } from "vuelidate/lib/validators"
 import formInput from "vue/controls/input.vue"
-import grapher from "utils/grapher"
-
-function setCookie(name, value){
-    document.cookie = `${name}=${value};path=/;`
-}
+import { inputify, gqlreq, setCookie } from "utils/grapher"
 
 export default {
     mixins: [validationMixin],
@@ -86,7 +82,7 @@ export default {
                 user: "",
                 password: ""
             },
-            errors: undefined,
+            errors: null,
             submitted: false
         }
     },
@@ -104,7 +100,7 @@ export default {
         async signIn(){
             if(this.submitted === true) return
             this.submitted = true
-            this.error = undefined
+            this.errors = null
 
             this.$v.$touch()
 
@@ -113,19 +109,17 @@ export default {
                 return
             }
 
-            let input = grapher.inputify(this.form)
-
-            let request = await grapher.request(`
+            let { errors, data } = await gqlreq(`
             mutation {
-                loginUser(input: ${input})
+                loginUser(input: ${inputify(this.form)})
             }
             `)
 
-            if(request.errors){
-                this.errors = request.errors
-                console.log(request.errors)
-            }else if(request.data){
-                let token = request.data.loginUser
+            if(errors){
+                this.errors = errors
+                console.log(errors)
+            }else if(data){
+                let token = data.loginUser
                 if(token){
                     setCookie('token', token)
                     window.location.href = '/app'

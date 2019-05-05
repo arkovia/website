@@ -1,6 +1,7 @@
 module.exports = {
     "admin": [
         "viewSignatures",
-        "modifyUser"
+        "modifyUser",
+        "postAbout"
     ]
 }

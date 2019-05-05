@@ -1,7 +1,7 @@
 import axios from "axios"
 
 function getValue(value) {
-    if (value === undefined) return null
+    if (value === undefined || value === null) return null
     if (value.constructor === Object) return inputifyObject(value)
     if (value.constructor === Array) return [`${ value.map(val => getValue(val))}`]
 
@@ -20,7 +20,7 @@ function getObjectItems(object) {
 
 function inputifyObject(object) {
     let string = `{
-    ${getObjectItems(object)}
+        ${getObjectItems(object)}
     }`
 
     return string
@@ -44,14 +44,15 @@ function getCookie(cname) {
 
 
 export function inputify(data){
-        return inputifyObject(data)
-    }
+    return inputifyObject(data)
+}
 
-export async function qlreq(query, token) {
+export async function gqlreq(query, token) {
     let config = {}
+
     if(token){
         config.headers = {
-            token: token
+            token
         }
     }
 
@@ -61,4 +62,8 @@ export async function qlreq(query, token) {
     }, config)
 
     return request.data
+}
+
+export async function setCookie(name, value){
+    document.cookie = `${name}=${value};path=/;`
 }

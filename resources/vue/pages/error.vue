@@ -4,7 +4,7 @@
         <template slot="content">
             <hero class="colored padding-medium align-center">
                 <div class="inner-hero">
-                    <h2 class="code">{{ code }}</h2>
+                    <h1 class="code">{{ code }}</h1>
                     <div class="description">{{ getDescription }}</div>
                 </div>
             </hero>
@@ -12,9 +12,17 @@
                 <div class="inner-hero">
                     <div class="flex-center">
                         <card class="padding-medium">
-                            <h4>{{ `${error.name}: ${error.message }`}}</h4>
-                            <div v-for="err in error.stack" :key="err">
-                                <p>{{ err }}</p>
+                            <div>
+                                <h2>Message</h2>
+                                <pre class="errorTrace">
+                                    {{ error.message }}
+                                </pre>
+                            </div>
+                            <div v-if="error.stack">
+                                <h2>Stack Trace</h2>
+                                <pre class="errorTrace">
+                                    {{ error.stack.join('\n') }}
+                                </pre>
                             </div>
                         </card>
                     </div>
@@ -48,6 +56,13 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
+.errorTrace{
+    background #080a18;
+    color: rgba(255,255,255,0.8)
+    padding: 8px
+    border-radius: 4px
+    overflow overlay
+}
 .description {
     font-size: 2em
     font-weight: 200

@@ -52,7 +52,7 @@
 
                                 <formInput
                                     :vmodel.sync="form.lastName"
-                                    placeholder="First Name"
+                                    placeholder="Last Name"
                                     autocomplete="family-name"
                                     :v="$v.form.lastName"
                                     :error="this.$v.form.lastName.$error ? 'You must enter a last name' : undefined"

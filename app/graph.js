@@ -12,6 +12,7 @@ const User = require('../app/models/user')
 
 const schemaString = gql`
 scalar ObjectID
+
 directive @isAuthenticated on FIELD | FIELD_DEFINITION
 directive @hasPermission(permission: String) on FIELD | FIELD_DEFINITION
 directive @hasRole(role: String) on FIELD | FIELD_DEFINITION
@@ -33,7 +34,6 @@ type Mutation {
 
 ${Signature.graph}
 ${User.graph}
-
 `
 
 const resolvers = {

@@ -31,6 +31,10 @@ export default {
         background-repeat: no-repeat;
         background-size: cover;
     }
+    &.dark{
+        background: #001123
+        color: white
+    }
     .inner-hero{
         margin: auto 
         max-width $desktop
@@ -55,6 +59,9 @@ export default {
         &.padding-none {
             padding 10px
         }
+        &.padding-tiny {
+            padding 20px
+        }
         &.padding-small{
             padding 5vh 10px
         }
@@ -70,6 +77,9 @@ export default {
     }
     &.padding-none {
         padding 10px
+    }
+    &.padding-tiny {
+        padding 20px
     }
     &.padding-small{
         padding 5vh 10px
