@@ -38,8 +38,3 @@ try {
 } catch (error) {
     console.log('server could not start on https')
 }
-
-process.on('unhandledRejection', (error, p) => {
-    console.log('=== UNHANDLED REJECTION ===');
-    console.dir(error.stack);
-});  

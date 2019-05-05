@@ -24,8 +24,7 @@ module.exports = function(app){
         domain = app.get('env:domain')
 
         ctx.render = async(vueFile, ssrContext = {}) => {
-            ssrContext.data = {domain}
-            ssrContext.domain = domain
+            ssrContext.state = { domain }
             ctx.body = await servue.render(vueFile, {ctx, ...ssrContext})
         }
     
