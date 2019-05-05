@@ -18,12 +18,14 @@ module.exports = function(app){
         /**
          * render returns promise to the string which contians the rendered .vue file
          * @param {string} vueFile - path to vue single-file-component
-         * @param {Object=} [data={}] - data to be inserted into .vue file when generating renderer
+         * @param {Object=} [ssrContext={}] - data to be inserted into .vue file when generating renderer
          * @returns {Promise<string>}
          */
-        ctx.state.domain = app.get('env:domain')
+        domain = app.get('env:domain')
+
         ctx.render = async(vueFile, ssrContext = {}) => {
-            ssrContext.data.domain = app.get('env:domain')
+            ssrContext.data = {domain}
+            ssrContext.domain = domain
             ctx.body = await servue.render(vueFile, {ctx, ...ssrContext})
         }
     
