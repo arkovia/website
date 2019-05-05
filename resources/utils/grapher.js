@@ -56,7 +56,7 @@ export async function gqlreq(query, token) {
         }
     }
 
-    let request = await axios.post('https://localhost/graph/', {
+    let request = await axios.post('//graph/', {
         query,
         variables: {}
     }, config)
