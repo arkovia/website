@@ -19,9 +19,10 @@ router.use('/app', async (ctx, next) => {
         }
     } catch (err) { //error page
         ctx.status = 500
+        if(!(err instanceof Error)) err = new Error(err)
         return await ctx.render('vue/pages/error', { data: {
             code: ctx.status,
-            error: jsonifyError(new Error(err))
+            error: jsonifyError(err)
         }})
     }
 }).get('/sign-in', async (ctx) => {

@@ -47,9 +47,9 @@ export function inputify(data){
     return inputifyObject(data)
 }
 
-export async function gqlreq(query, ctx) {
-    let { token } = ctx.state
-    let domain = ctx.app.get('env:domain')
+export async function gqlreq(query, state) {
+    let { token, domain } = state
+    
     let config = {}
 
     if(token){

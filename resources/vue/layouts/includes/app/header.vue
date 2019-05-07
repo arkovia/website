@@ -58,11 +58,9 @@ export default {
             this.openedMenu = !this.openedMenu
         },
         async signOut(){
-            let token = this.$state.token
-
             let { data, errors } = await gqlreq(`mutation {
-                signOut(input: ${inputify({token})})
-            }`, token)
+                signOut(input: ${inputify({token: this.$state.token})})
+            }`, this.$state)
 
             if(errors) throw new Error(errors)
 

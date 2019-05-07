@@ -52,7 +52,7 @@
                                     <a href="#" class="bold">Forgot login details?</a>
                                 </p>
                                 <p class="small-text align-center">
-                                    Don't have an account? <a href="/start" class="bold">Start now.</a>
+                                    Don't have an account? <a href="/sign-up" class="bold">Sign up now.</a>
                                 </p>
                                 
                             </form>
@@ -76,6 +76,9 @@ import { inputify, gqlreq, setCookie } from "utils/grapher"
 
 export default {
     mixins: [validationMixin],
+    async serverPrefetch(){
+        this.domain = this.$ssrContext.ctx.state.domain
+    },
     data() {
         return {
             form: {
@@ -83,7 +86,8 @@ export default {
                 password: ""
             },
             errors: null,
-            submitted: false
+            submitted: false,
+            domain: null
         }
     },
     validations: {
@@ -113,7 +117,7 @@ export default {
             mutation {
                 loginUser(input: ${inputify(this.form)})
             }
-            `)
+            `, { domain: this.domain})
 
             if(errors){
                 this.errors = errors

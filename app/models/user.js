@@ -86,7 +86,7 @@ class User extends Model {
     async createToken(ctx){
         let secret = ctx.app.get('env:secret')
         let session = {
-            token: jwt.sign({id: String(this.document._id)}, secret),
+            token: jwt.sign({id: String(this.document._id), created: new Date().getTime()}, secret),
             lastUsed: new Date().getTime()
         }
 
@@ -107,14 +107,12 @@ class User extends Model {
         
         if(decodedToken.id){
             let user = await User.findOne({_id: new ObjectID(decodedToken.id)})
-            if(user.validateToken(token)){
+            if(user && user.validateToken(token)){
                 return user
             }
         }
 
         return null
-
-        //figure out fail process
     }
     
     static get resolvers(){
@@ -148,7 +146,13 @@ class User extends Model {
 
                 let userObject = Object.assign(userBoilerPlate, input)
 
+                //generate display picture
+                let initials = `${userObject.firstName.substr(0, 1) + userObject.lastName.substr(0,1)}`
+                userObject.displayPicture = generateDisplayPicture(initials)
+
                 let model = new User(userObject)
+
+                await model.save()
 
                 let token = model.createToken(ctx)
 
@@ -160,13 +164,6 @@ class User extends Model {
                 if(!model) model = await this.findOne({email: input.user.toLowerCase()})
                 if(!model) model = await this.findOne({username: input.user})
                 if(!model) throw Error(`No user found with username or email of '${input.user}'`)
-
-                if(!model.document.displayPicture){
-                    let doc = model.document
-                    let initials = `${doc.firstName.substr(0, 1) + doc.lastName.substr(0,1)}`
-                    model.document.displayPicture = generateDisplayPicture(initials)
-                    await model.save()
-                }
 
                 let { password } = model.document
 

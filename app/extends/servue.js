@@ -1,10 +1,15 @@
+'use strict'
 const Servue = require('servue')
 
 module.exports = function(app){
     var servue = new Servue()
     servue.resources = app.get('path:resources')
     servue.mode = app.get('env:env') ? app.get('env:env') : 'production'
-    //servue.precompile('vue/pages')
+
+    if(app.get('env') === 'production') {
+        servue.precompile('vue/pages')
+    }
+
     servue.webpackCommon.module.rules.push({
         test: /\.styl(us)?$/,
         use: [
@@ -15,16 +20,14 @@ module.exports = function(app){
     })
 
     app.use(async (ctx, next) => {
+
         /**
          * render returns promise to the string which contians the rendered .vue file
          * @param {string} vueFile - path to vue single-file-component
          * @param {Object=} [ssrContext={}] - data to be inserted into .vue file when generating renderer
          * @returns {Promise<string>}
          */
-        domain = app.get('env:domain')
-
         ctx.render = async(vueFile, ssrContext = {}) => {
-            ssrContext.state = { domain }
             ctx.body = await servue.render(vueFile, {ctx, ...ssrContext})
         }
     

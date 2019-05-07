@@ -28,12 +28,18 @@ statizer({
         email: null,
         username: null,
         displayPicture: null
-    }
+    },
+    domain: null
 })
 
 export default {
     async serverPrefetch(){
         let { ctx } = this.$ssrContext
+
+        let { token, domain } = ctx.state
+        
+        this.$state.token = token
+        this.$state.domain = domain
         
         let { data, errors } = await gqlreq(`{
             me {
@@ -43,12 +49,11 @@ export default {
                 username
                 displayPicture
             }
-        }`, ctx)
+        }`, this.$state)
 
         if(errors) throw errors
 
         this.$state.me = data.me
-        this.$state.token = ctx.state.token
     },
     components: {
         master,

@@ -19,13 +19,7 @@
     </members>
 </template>
 <script>
-import members from "vue/layouts/members.vue"
 
-export default {
-    components: {
-        members
-    }
-}
 </script>
 <style lang="stylus" scoped>
 

@@ -100,6 +100,9 @@ function setCookie(name, value){
 
 export default {
     mixins: [validationMixin],
+    async serverPrefetch(){
+        this.domain = this.$ssrContext.ctx.state.domain
+    },
     data() {
         return {
             form: {
@@ -109,8 +112,9 @@ export default {
                 email: '',
                 password: ''
             },
-            errors: undefined,
-            submitted: false
+            errors: null,
+            submitted: false,
+            domain: null
         }
     },
     validations: {
@@ -136,7 +140,7 @@ export default {
         async signUp(){
             if(this.submitted === true) return
             this.submitted = true
-            this.error = undefined
+            this.error = null
 
             this.$v.$touch()
 
@@ -151,11 +155,10 @@ export default {
             mutation {
                 createUser(input: ${input})
             }
-            `)
+            `, { domain: this.domain })
 
             if(request.errors){
                 this.errors = request.errors
-                console.log(request.errors)
             }else if(request.data){
                 let token = request.data.createUser
                 if(token){
