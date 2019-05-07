@@ -23,7 +23,6 @@
                                         <p>{{ error.message }}</p>
                                     </div>
                                 </div>
-                                
 
                                 <formInput
                                     :vmodel.sync="form.user"
@@ -54,7 +53,6 @@
                                 <p class="small-text align-center">
                                     Don't have an account? <a href="/sign-up" class="bold">Sign up now.</a>
                                 </p>
-                                
                             </form>
                         </card>
                     </div>

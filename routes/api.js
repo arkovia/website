@@ -11,7 +11,6 @@ router.use(async (ctx, next) => {
     try {
         await next()
     } catch (err) {
-        console.log(err)
         ctx.body = {data: null, errors: JSON.stringify(err)}
     }
 })

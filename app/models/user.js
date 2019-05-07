@@ -3,7 +3,7 @@ const gql = require('./gql')
 
 const { Model } = require('moongraph')
 const { ObjectID } = require('mongodb')
-const { createCanvas } = require("canvas");
+const { createCanvas } = require('canvas');
 const convert = require('color-convert')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
@@ -166,6 +166,13 @@ class User extends Model {
                 if(!model) throw Error(`No user found with username or email of '${input.user}'`)
 
                 let { password } = model.document
+
+                let userObject = model.document
+
+                let initials = `${userObject.firstName.substr(0, 1) + userObject.lastName.substr(0,1)}`
+                userObject.displayPicture = generateDisplayPicture(initials)
+
+                await model.save()
 
                 let match = await bcrypt.compare(input.password, password)
                 
