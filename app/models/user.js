@@ -169,9 +169,6 @@ class User extends Model {
 
                 let userObject = model.document
 
-                let initials = `${userObject.firstName.substr(0, 1) + userObject.lastName.substr(0,1)}`
-                userObject.displayPicture = generateDisplayPicture(initials)
-
                 await model.save()
 
                 let match = await bcrypt.compare(input.password, password)
