@@ -6,7 +6,7 @@
     "main": "index.js",
     "dependencies": {
         "apollo-server-koa": "^2.4.8",
-        "axios": "^0.18.0",
+        "axios": "^0.18.1",
         "bcrypt": "^3.0.4",
         "canvas": "^2.4.1",
         "color-convert": "^2.0.0",
