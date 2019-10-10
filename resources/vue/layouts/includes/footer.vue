@@ -15,7 +15,7 @@
                         <img class="logo" src="/images/arkovia.png" alt="Arkovia Logo">
                     </a>
                     <div class="government-text">The Official Government of Arkovia</div>
-                    <a class="link govenrment-text" href="https://promatia.com">This website will soon be merged with Promatia</a>
+                    <a class="link govenrment-text" href="https://promatia.com">This website will soon be merged into Promatia</a>
                 </div>
             </div>
         </div>
