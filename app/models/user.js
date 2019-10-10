@@ -144,6 +144,10 @@ class User extends Model {
                 input.email = input.email.toLowerCase()
                 input.password = await bcrypt.hash(input.password, 12)
 
+                //Disallow spaces for usernames/emails
+                //Lowercase usernames & emails on save
+                //Lowercase login username
+
                 let userObject = Object.assign(userBoilerPlate, input)
 
                 //generate display picture
@@ -166,8 +170,6 @@ class User extends Model {
                 if(!model) throw Error(`No user found with username or email of '${input.user}'`)
 
                 let { password } = model.document
-
-                let userObject = model.document
 
                 await model.save()
 

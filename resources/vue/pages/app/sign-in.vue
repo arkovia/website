@@ -12,7 +12,7 @@
                         <card class="flex-center-all medium padding-none">
                             <div class="gradient-top">
                                 <img class="logo" src="\images\arkovia.png" alt="Arkovia Logo">
-                                <div class="logo-text">Arkovia</div>
+                                <div class="logo-text">myArk</div>
                             </div>
 
                             <form class="inner-card flex-column max-350">

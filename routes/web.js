@@ -1,7 +1,6 @@
 const Slashed = require('slashed')
 const Router = Slashed.Router
 const jsonifyError = require('jsonify-error')
-const User = require('../app/models/user')
 
 var router = new Router()
 

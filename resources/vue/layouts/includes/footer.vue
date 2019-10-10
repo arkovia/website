@@ -15,6 +15,7 @@
                         <img class="logo" src="/images/arkovia.png" alt="Arkovia Logo">
                     </a>
                     <div class="government-text">The Official Government of Arkovia</div>
+                    <div><a class="link" href="https://promatia.com">This website will soon be merged with Promatia</a></div>
                 </div>
             </div>
         </div>
@@ -98,4 +99,6 @@ i.material-icons{
     font-size 1em
 }
 
+.link
+    color white
 </style>
