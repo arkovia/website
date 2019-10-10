@@ -15,7 +15,7 @@
                         <img class="logo" src="/images/arkovia.png" alt="Arkovia Logo">
                     </a>
                     <div class="government-text">The Official Government of Arkovia</div>
-                    <div><a class="link" href="https://promatia.com">This website will soon be merged with Promatia</a></div>
+                    <a class="link govenrment-text" href="https://promatia.com">This website will soon be merged with Promatia</a>
                 </div>
             </div>
         </div>
@@ -100,5 +100,8 @@ i.material-icons{
 }
 
 .link
-    color white
+    padding 10px
+    display block
+    font-size 1.6em
+    text-align center
 </style>
