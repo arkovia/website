@@ -103,7 +103,6 @@ i.material-icons{
 .link
     padding 10px
     display block
-    font-size 16px
-    font-size 1.6em
+    font-size 18px
     text-align center
 </style>
